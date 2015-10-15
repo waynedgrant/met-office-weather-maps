@@ -40,7 +40,7 @@ These instructions will set up met-office-weather-maps on a regular schedule on 
 | TemperatureForecastMap             | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/temperature-forecast-map-layer   |
 | VisibleSatelliteObservationMap     | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/satellite-visible-map-layer      |
 
-* - Excepting animation image
+\* - Excepting animation image
 
 ### Example Harness
 
