@@ -8,28 +8,30 @@ API to fetch weather maps from the [Met Office](http://www.metoffice.gov.uk) usi
 
 ## Overview
 
-The [Met Office](http://www.metoffice.gov.uk) have an API called [DataPoint](http://www.metoffice.gov.uk/datapoint) which, among other capabilities, exposes web services to allow clients to request a wide selection of weather maps for the UK as images.
+The [Met Office](http://www.metoffice.gov.uk) provide an API called [DataPoint](http://www.metoffice.gov.uk/datapoint) which, among other capabilities, exposes web services that allow clients to request a wide selection of time series weather maps for the UK as images.
 
 These maps make a great addition to any UK-centric weather website. However, there are several issues implementors have to overcome:
 
 1. Most of the map images are simple layers with no map. Implementors have to supply their own base and overlay images to fit with the required boundary box.
-2. DataPoint has fair use call limits and map types have differing update schedules. Implementors have to create call schedules that keep their websites up-to-date but do not exceed their call limit.
+2. DataPoint has fair use call limits and map types can have very different update schedules. Implementors have to create call schedules that keep their websites up-to-date but do not exceed their call limit.
 3. All of the maps are available as a time-series. However, there is no option to request an animated image that combines an entire time series.
+4. Most of the map images are simple layers with no indication as to what time they are relevant for.
 
 met-office-weather-maps solves each of these issues:
 
-1. All map images available as layers are processed by met-office-weather-maps to add appropriate base and overlay layers for the correct boundary box around the UK.
-2. met-office-weather-maps caches the timestamps of web service calls and only fetches new images when new versions are available. This dramatically reduces the number of DataPoint web service calls even if met-office-weather-maps is called on a frequent schedule.
-3. met-office-weather-maps automatically creates a GIF animation of each map's time series it fetches.
+1. All map images available only as simple layers are processed by met-office-weather-maps to add appropriate base and overlay layers for the correct boundary box around the UK.
+2. met-office-weather-maps instruments DataPoint's capabilities API and caches the timestamps of all image web service calls so that it only fetches new map images when new versions are available. This dramatically reduces the number of DataPoint web service calls even if met-office-weather-maps is called on a frequent schedule.
+3. met-office-weather-maps automatically creates a GIF animation of each map time series it fetches.
+4. Where map images are not timestamped met-office-weather-maps automatically adds a UTC date/time to the top-left corner.
  
-The original use case for met-office-weather-maps was as a scheduled job to keep the weather maps on my web site up-to-date. The following instructions concentrate on this particular scenario.
+The original use case for met-office-weather-maps was as a scheduled job to keep the weather maps on my own weather web site up-to-date. The following instructions concentrate on this particular scenario.
 
 For an example of met-office-weather-maps in action see [http://www.waynedgrant.com/weather](http://www.waynedgrant.com/weather/maps.html).
 
 ## Requirements
 
 1. [DataPoint](http://www.metoffice.gov.uk/datapoint) API key (available for free)
-2. PHP version 5.5 and above installed on a web server
+2. PHP version 5.5 or above installed on a web server
 
 ## Installation
 
