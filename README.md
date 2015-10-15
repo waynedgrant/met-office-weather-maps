@@ -59,18 +59,18 @@ These instructions can be followed to set up **met-office-weather-maps** on a re
 
 ## API
 
-| PHP Class                          | Available Formats | DataPoint Reference                                                            |
-|------------------------------------|-------------------|--------------------------------------------------------------------------------|
-| CloudCoverAndRainfallForecastMap   | gif, png          | N/A                                                                            |
-| CloudCoverForecastMap              | gif, png          | http://www.metoffice.gov.uk/datapoint/product/cloud-cover-forecast-map-layer   |
-| InfraredSatelliteObservationMap    | gif, png          | http://www.metoffice.gov.uk/datapoint/product/satellite-infrared-map-layer     |
-| LightningObservationMap            | gif, png          | http://www.metoffice.gov.uk/datapoint/product/lightning-strike-map-layer       |
-| RainfallForecastMap                | gif, png          | http://www.metoffice.gov.uk/datapoint/product/precipitation-forecast-map-layer |
-| RainfallObservationMap             | gif, png          | http://www.metoffice.gov.uk/datapoint/product/rainfall-radar-map-layer         |
-| SurfacePressureExtendedForecastMap | gif               | http://www.metoffice.gov.uk/datapoint/product/surface-pressure-charts          |
-| SurfacePressureForecastMap         | gif, png          | http://www.metoffice.gov.uk/datapoint/product/pressure-forecast-map-layer      |
-| TemperatureForecastMap             | gif, png          | http://www.metoffice.gov.uk/datapoint/product/temperature-forecast-map-layer   |
-| VisibleSatelliteObservationMap     | gif, png          | http://www.metoffice.gov.uk/datapoint/product/satellite-visible-map-layer      |
+| PHP Class                          | Image Formats | DataPoint Reference                                                            |
+|------------------------------------|---------------|--------------------------------------------------------------------------------|
+| CloudCoverAndRainfallForecastMap   | gif, png      | N/A                                                                            |
+| CloudCoverForecastMap              | gif, png      | http://www.metoffice.gov.uk/datapoint/product/cloud-cover-forecast-map-layer   |
+| InfraredSatelliteObservationMap    | gif, png      | http://www.metoffice.gov.uk/datapoint/product/satellite-infrared-map-layer     |
+| LightningObservationMap            | gif, png      | http://www.metoffice.gov.uk/datapoint/product/lightning-strike-map-layer       |
+| RainfallForecastMap                | gif, png      | http://www.metoffice.gov.uk/datapoint/product/precipitation-forecast-map-layer |
+| RainfallObservationMap             | gif, png      | http://www.metoffice.gov.uk/datapoint/product/rainfall-radar-map-layer         |
+| SurfacePressureExtendedForecastMap | gif           | http://www.metoffice.gov.uk/datapoint/product/surface-pressure-charts          |
+| SurfacePressureForecastMap         | gif, png      | http://www.metoffice.gov.uk/datapoint/product/pressure-forecast-map-layer      |
+| TemperatureForecastMap             | gif, png      | http://www.metoffice.gov.uk/datapoint/product/temperature-forecast-map-layer   |
+| VisibleSatelliteObservationMap     | gif, png      | http://www.metoffice.gov.uk/datapoint/product/satellite-visible-map-layer      |
 
 All class constructors take the same two mandatory parameters:
 
