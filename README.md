@@ -24,9 +24,21 @@ met-office-weather-maps solves each of these issues:
 3. met-office-weather-maps automatically creates a GIF animation of each map time series it fetches.
 4. Where map images are not timestamped met-office-weather-maps automatically adds a UTC date/time to the top-left corner.
  
+For example for this raw layer for precipitation fetched from DataPoint:
+
+![alt tag](precipitation_layer.png)
+
+met-office-weather-maps will create a processed image similar to:
+
+![alt tag](precipitation_processed.png)
+
+and an animated GIF for the entire time series of precipitation images:
+
+![alt tag](precipitation_animated.gif)
+
 The original use case for met-office-weather-maps was as a scheduled job to keep the weather maps on my own weather web site up-to-date. The following instructions concentrate on this particular scenario.
 
-For an example of met-office-weather-maps in action see [http://www.waynedgrant.com/weather](http://www.waynedgrant.com/weather/maps.html).
+For more examples of met-office-weather-maps in action see [http://www.waynedgrant.com/weather](http://www.waynedgrant.com/weather/maps.html).
 
 ## Requirements
 
