@@ -44,6 +44,8 @@ These instructions will set up met-office-weather-maps on a regular schedule on 
 
 ### Example Harness
 
+This exampel harness will fetch all available maps into separate folders.
+
 ```php
 <?php
 
@@ -62,7 +64,6 @@ define(API_KEY, 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee');
 
 $dirName = dirname(__FILE__ );
 
-// Fetch all available maps into separate folders
 $maps = array(
     new CloudCoverAndRainfallForecastMap(API_KEY, $dirName . '/cloud-rain-fcast'),
     new CloudCoverForecastMap(API_KEY, $dirName . '/cloud-fcast'),
