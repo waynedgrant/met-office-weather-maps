@@ -8,7 +8,9 @@ API to fetch weather maps from the [Met Office](http://www.metoffice.gov.uk) usi
 
 ## Overview
 
-TODO
+The [Met Office](http://www.metoffice.gov.uk) have an API called [DataPoint](http://www.metoffice.gov.uk/datapoint) which, among other capabilities, exposes web services to allow clients to request a wide selection of weather maps for the UK.
+
+For an example of met-office-weather-maps in action see [http://www.waynedgrant.com/weather](http://www.waynedgrant.com/weather/maps.html)
 
 ## Requirements
 
@@ -44,7 +46,7 @@ These instructions will set up met-office-weather-maps on a regular schedule on 
 
 ### Example Harness
 
-This exampel harness will fetch all available maps into separate folders.
+This example harness code will fetch all available maps into separate folders.
 
 ```php
 <?php
