@@ -12,30 +12,37 @@ TODO
 
 ## Requirements
 
-TODO
+* [DataPoint](http://www.metoffice.gov.uk/datapoint) API key (available for free)
+* PHP version 5.5 and above installed on the web server
 
 ## Installation
 
-TODO
+These instructions will set up met-office-weather-maps on a regular schedule on a generic LAMP stack web server.
+
+* Download the source code for the [latest release](https://github.com/waynedgrant/met-office-weather-maps/releases) and unzip it
+* Get a copy of [GifCreator.php](https://github.com/Sybio/GifCreator/blob/master/src/GifCreator/GifCreator.php) by **Clément Guillemain** and place it in the unzipped **met-office-weather-maps/src** directory
+* Write a harness in PHP to fetch the maps you need (see **API** and **Example Harness** below)
+* Upload all files in **met-office-weather-maps/src** and your **harness** to a directory on your web server
+* Set up a cron schedule to kick off your harness regularly (e.g every 15 minutes)
 
 ## API
 
-| PHP Class                          | Type        | Base Map          | Overlay Map                      | Available Formats | DataPoint Reference                                                            |
-|------------------------------------|-------------|-------------------|----------------------------------|-------------------|--------------------------------------------------------------------------------|
-| CloudCoverAndRainfallForecastMap   | Forecast    | uk_base_colour    | uk_overlay_black_full_outline    | gif, png*         | N/A                                                                            |
-| CloudCoverForecastMap              | Forecast    | uk_base_colour    | uk_overlay_black_full_outline    | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/cloud-cover-forecast-map-layer   |
-| InfraredSatelliteObservationMap    | Observation | N/A               | uk_overlay_yellow_cutout_outline | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/satellite-infrared-map-layer     |
-| LightningObservationMap            | Observation | uk_base_greyscale | N/A                              | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/lightning-strike-map-layer       |
-| RainfallForecastMap                | Forecast    | uk_base_colour    | uk_overlay_black_full_outline    | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/precipitation-forecast-map-layer |
-| RainfallObservationMap             | Observation | uk_base_colour    | uk_overlay_black_full_outline    | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/rainfall-radar-map-layer         |
-| SurfacePressureExtendedForecastMap | Forecast    | N/A               | N/A                              | gif               | http://www.metoffice.gov.uk/datapoint/product/surface-pressure-charts          |
-| SurfacePressureForecastMap         | Forecast    | uk_base_greyscale | N/A                              | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/pressure-forecast-map-layer      |
-| TemperatureForecastMap             | Forecast    | uk_base_greyscale | uk_overlay_black_full_outline    | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/temperature-forecast-map-layer   |
-| VisibleSatelliteObservationMap     | Observation | N/A               | uk_overlay_yellow_cutout_outline | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/satellite-visible-map-layer      |
+| PHP Class                          | Available Formats | DataPoint Reference                                                            |
+|------------------------------------|-------------------|--------------------------------------------------------------------------------|
+| CloudCoverAndRainfallForecastMap   | gif, png*         | N/A                                                                            |
+| CloudCoverForecastMap              | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/cloud-cover-forecast-map-layer   |
+| InfraredSatelliteObservationMap    | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/satellite-infrared-map-layer     |
+| LightningObservationMap            | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/lightning-strike-map-layer       |
+| RainfallForecastMap                | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/precipitation-forecast-map-layer |
+| RainfallObservationMap             | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/rainfall-radar-map-layer         |
+| SurfacePressureExtendedForecastMap | gif               | http://www.metoffice.gov.uk/datapoint/product/surface-pressure-charts          |
+| SurfacePressureForecastMap         | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/pressure-forecast-map-layer      |
+| TemperatureForecastMap             | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/temperature-forecast-map-layer   |
+| VisibleSatelliteObservationMap     | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/satellite-visible-map-layer      |
 
-``* - Excepting animation image
+* - Excepting animation image
 
-## Example
+### Example Harness
 
 ```php
 <?php
@@ -55,6 +62,7 @@ define(API_KEY, 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee');
 
 $dirName = dirname(__FILE__ );
 
+// Fetch all available maps into separate folders
 $maps = array(
     new CloudCoverAndRainfallForecastMap(API_KEY, $dirName . '/cloud-rain-fcast'),
     new CloudCoverForecastMap(API_KEY, $dirName . '/cloud-fcast'),
