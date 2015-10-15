@@ -8,19 +8,37 @@ API to fetch weather maps from the [Met Office](http://www.metoffice.gov.uk) usi
 
 ## Overview
 
-TODO
+The [Met Office](http://www.metoffice.gov.uk) provide an API called [DataPoint](http://www.metoffice.gov.uk/datapoint) which, among other capabilities, exposes web services that allow clients to request a wide selection of time series weather maps for the UK as images.
+
+These maps make a great addition to any UK-centric weather website. However, there are several issues implementors have to overcome:
+
+1. Most of the map images are simple layers with no map. Implementors have to supply their own base and overlay images to fit with the required boundary box.
+2. DataPoint has fair use call limits and map types can have very different update schedules. Implementors have to create call schedules that keep their websites up-to-date but do not exceed their call limit.
+3. All of the maps are available as a time-series. However, there is no option to request an animated image that combines an entire time series.
+4. Most of the map images are simple layers with no indication as to what time they are relevant for.
+
+met-office-weather-maps solves each of these issues:
+
+1. All map images available only as simple layers are processed by met-office-weather-maps to add appropriate base and overlay layers for the correct boundary box around the UK.
+2. met-office-weather-maps instruments DataPoint's capabilities API and caches the timestamps of all image web service calls so that it only fetches new map images when new versions are available. This dramatically reduces the number of DataPoint web service calls even if met-office-weather-maps is called on a frequent schedule.
+3. met-office-weather-maps automatically creates a GIF animation of each map time series it fetches.
+4. Where map images are not timestamped met-office-weather-maps automatically adds a UTC date/time to the top-left corner.
+ 
+The original use case for met-office-weather-maps was as a scheduled job to keep the weather maps on my own weather web site up-to-date. The following instructions concentrate on this particular scenario.
+
+For an example of met-office-weather-maps in action see [http://www.waynedgrant.com/weather](http://www.waynedgrant.com/weather/maps.html).
 
 ## Requirements
 
-* [DataPoint](http://www.metoffice.gov.uk/datapoint) API key (available for free)
-* PHP version 5.5 and above installed on the web server
+1. [DataPoint](http://www.metoffice.gov.uk/datapoint) API key (available for free)
+2. PHP version 5.5 or above installed on a web server
 
 ## Installation
 
 These instructions will set up met-office-weather-maps on a regular schedule on a generic LAMP stack web server.
 
 * Download the source code for the [latest release](https://github.com/waynedgrant/met-office-weather-maps/releases) and unzip it
-* Get a copy of [GifCreator.php](https://github.com/Sybio/GifCreator/blob/master/src/GifCreator/GifCreator.php) by **Clément Guillemain** and place it in the unzipped **met-office-weather-maps/src** directory
+* Retrieve a copy of [GifCreator.php](https://github.com/Sybio/GifCreator/blob/master/src/GifCreator/GifCreator.php) by **Clément Guillemain** and place it in the unzipped **met-office-weather-maps/src** directory
 * Write a harness in PHP to fetch the maps you need (see **API** and **Example Harness** below)
 * Upload all files in **met-office-weather-maps/src** and your **harness** to a directory on your web server
 * Set up a cron schedule to kick off your harness regularly (e.g every 15 minutes)
@@ -40,9 +58,11 @@ These instructions will set up met-office-weather-maps on a regular schedule on 
 | TemperatureForecastMap             | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/temperature-forecast-map-layer   |
 | VisibleSatelliteObservationMap     | gif, png*         | http://www.metoffice.gov.uk/datapoint/product/satellite-visible-map-layer      |
 
-* - Excepting animation image
+\* - Excepting animation image
 
 ### Example Harness
+
+This example harness code will fetch all available maps into separate folders.
 
 ```php
 <?php
@@ -62,7 +82,6 @@ define(API_KEY, 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee');
 
 $dirName = dirname(__FILE__ );
 
-// Fetch all available maps into separate folders
 $maps = array(
     new CloudCoverAndRainfallForecastMap(API_KEY, $dirName . '/cloud-rain-fcast'),
     new CloudCoverForecastMap(API_KEY, $dirName . '/cloud-fcast'),
