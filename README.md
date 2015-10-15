@@ -10,10 +10,10 @@ API to fetch weather maps from the [Met Office](http://www.metoffice.gov.uk) usi
 
 The [Met Office](http://www.metoffice.gov.uk) provide an API called [DataPoint](http://www.metoffice.gov.uk/datapoint) which, among other capabilities, exposes web services that allow clients to request a wide selection of time series weather maps for the UK as images.
 
-These maps make a great addition to any UK-centric weather website. However, there are several issues implementors have to overcome:
+These maps make a great addition to any UK-centric weather website. However, there are several issues users have to overcome:
 
-1. Most of the map images are simple layers with no map. Implementors have to supply their own base and overlay images to fit with the required boundary box.
-2. DataPoint has fair use call limits and map types can have very different update schedules. Implementors have to create call schedules that keep their websites up-to-date but do not exceed their call limit.
+1. Most of the map images are simple layers with no map. Users have to supply their own base and overlay images to fit with the required boundary box.
+2. DataPoint has fair use call limits and map types can have very different update schedules. Users have to create call schedules that keep their websites up-to-date but do not exceed their call limit.
 3. All of the maps are available as a time-series. However, there is no option to request an animated image that combines an entire time series.
 4. Most of the map images are simple layers with no indication as to what time they are relevant for.
 
