@@ -77,7 +77,7 @@ All class constructors take the same two mandatory parameters:
 * __apiKey__ Your DataPoint API Key
 * __workingFolder__ The folder to output map images to. Note each class instance must use a different working folder or their output will clash
 
-After construction of any of the classes simply call the **fetch()** method on it to fetch all images for the given map. After a successful fetch the *workingFolder** will contain the following files:
+After construction of any of the classes simply call the **fetch()** method on it to fetch all images for the given map. After a successful fetch the **workingFolder** will contain the following files:
 
 * __timestamp.txt__ cached timestamp file
 * __0.png ... n.png__ latest time series images for map in png format and in time order
