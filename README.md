@@ -8,25 +8,25 @@ API to fetch weather maps from the [Met Office](http://www.metoffice.gov.uk) usi
 
 ## Overview
 
-The [Met Office](http://www.metoffice.gov.uk) provide an API called [DataPoint](http://www.metoffice.gov.uk/datapoint) which, among other capabilities, exposes web services that allow clients to request a wide selection of time series weather maps for the UK as images.
+The [Met Office](http://www.metoffice.gov.uk) provide the [DataPoint](http://www.metoffice.gov.uk/datapoint) API which exposes web services that, among other capabilities, allow clients to request a wide selection of time series weather maps for the UK as images.
 
-These maps make a great addition to any UK-centric weather website. However, there are several issues users have to overcome:
+These maps make a great addition to any UK-centric weather website. However, there are several common issues users may have to overcome:
 
-1. Most of the map images are simple layers with no map. Users have to supply their own base and overlay images to fit with the required boundary box.
-2. DataPoint has fair use call limits and map types can have very different update schedules. User have to create call schedules that keep their websites up-to-date but do not exceed their call limit.
-3. All of the maps are available as a time-series. However, there is no option to request an animated image that combines an entire time series.
-4. Most of the map images are simple layers with no indication as to what time they are relevant for.
+1. Most of the map images are simple layers with no UK map. Users have to supply their own UK base and overlay map images that conform to the required boundary box.
+2. DataPoint has fair use call limits and map types can have very different update schedules. Users have to create call schedules that keep their website's maps up-to-date but do not exceed the fair use call limit.
+3. All of the maps are available as a time series. However, there is no option to request an animated image that combines an entire time series.
+4. Most of the map images are simple layers with no visual indication as to what time they are relevant for.
 5. A large collection of map images can be quite large and bandwidth intensive when referred to directly from a hosting web page.
 
 **met-office-weather-maps** solves each of these issues:
 
-1. All map images available only as simple layers are processed by **met-office-weather-maps** to add appropriate base and overlay layers for the correct boundary box around the UK.
-2. **met-office-weather-maps** instruments DataPoint's capabilities API and caches the timestamps of all image web service calls so that it only fetches new map images when new versions are available. This dramatically reduces the number of DataPoint web service calls even if **met-office-weather-maps** is called on a frequent schedule.
+1. Map images available only as simple layers are processed by **met-office-weather-maps** which adds appropriate UK base and overlay images for the required boundary box.
+2. **met-office-weather-maps** queries DataPoint's capabilities API and caches the timestamps of all web service calls so that it only fetches map images when new versions are available. This greatly reduces the number of DataPoint web service calls even if **met-office-weather-maps** is called on a frequent schedule.
 3. **met-office-weather-maps** automatically creates a GIF animation of each map time series it fetches.
 4. Where map images are not timestamped **met-office-weather-maps** automatically adds a UTC date/time to the top-left corner.
 5. **met-office-weather-maps** automatically creates thumbnails of all map images.
 
-For example for this raw layer for precipitation fetched from DataPoint:
+For example , this raw layer for precipitation is fetched from DataPoint:
 
 ![alt tag](precipitation_layer.png)
 
@@ -49,11 +49,11 @@ For more examples of **met-office-weather-maps** in action see [http://www.wayne
 
 ## Installation
 
-These instructions will set up **met-office-weather-maps** on a regular schedule on a generic LAMP stack web server.
+These instructions can be followed to set up **met-office-weather-maps** on a regular schedule on a generic LAMP stack web server.
 
 * Download the source code for the [latest release](https://github.com/waynedgrant/met-office-weather-maps/releases) and unzip it
 * Retrieve a copy of [GifCreator.php](https://github.com/Sybio/GifCreator/blob/master/src/GifCreator/GifCreator.php) by **Clément Guillemain** and place it in the unzipped **met-office-weather-maps/src** directory
-* Write a harness in PHP to fetch the maps you need (see **API** and **Example Harness** below)
+* Write a harness in PHP to fetch the maps you require (see **API** and **Example Harness** below but be wary of the advice in **Fair Use Notes*)
 * Upload all files in **met-office-weather-maps/src** and your **harness** to a directory on your web server
 * Set up a cron schedule to kick off your harness regularly (e.g every 15 minutes)
 
@@ -74,21 +74,21 @@ These instructions will set up **met-office-weather-maps** on a regular schedule
 
 All class constructors take the same two mandatory parameters:
 
-* __apiKey__ DataPoint API Key
-* __workingFolder__ Folder to output map images to. Note each class instance must use a different working folder or their output will clash
+* __apiKey__ Your DataPoint API Key
+* __workingFolder__ The folder to output map images to. Note each class instance must use a different working folder or their output will clash
 
-After construction simply call the **fetch()** method to fetch all images for the appropriate map. After a successful fetch the *workingFolder** will contain the following files:
+After construction of any of the classes simply call the **fetch()** method on it to fetch all images for the given map. After a successful fetch the *workingFolder** will contain the following files:
 
 * __timestamp.txt__ cached timestamp file
-* __0.png ... n.png__ latest time series images for map in png format in time order
-* __0-thumbnail.png ... n-thumbnail.png__ latest time series image thumbnails for map in png format in time order
-* __0.gif ... n.gif__ latest time series images for map in gif format in time order
-* __0-thumbnail.gif ... n-thumbnail.gif__ latest time series image thumbnails for map in gif format in time order
+* __0.png ... n.png__ latest time series images for map in png format and in time order
+* __0-thumbnail.png ... n-thumbnail.png__ latest time series image thumbnails for map in png format and in time order
+* __0.gif ... n.gif__ latest time series images for map in gif format and in time order
+* __0-thumbnail.gif ... n-thumbnail.gif__ latest time series image thumbnails for map in gif format and in time order
 * __animated.gif__ animated gif of all time series images with a two second frame rate
 
 ## Example Harness
 
-This example harness code will fetch all available maps into separate folders.
+This example harness code will fetch all available maps into separate folders (replace with your own DataPoint API Key).
 
 ```php
 <?php
@@ -129,8 +129,8 @@ foreach ($maps as $map) {
 
 ## Fair Use Notes
 
-At the time of writing the [DataPoint Terms and Conditions](http://www.metoffice.gov.uk/datapoint/terms-conditions) state fair use for a single API Key is to make up to 5,000 web service calls a day and up to 100 calls in a single minute.
+At the time of writing the [DataPoint Terms and Conditions](http://www.metoffice.gov.uk/datapoint/terms-conditions) state fair use for a single API Key is up to 5,000 web service calls a day and up to 100 calls in a single minute.
 
-Calling the above Example Harness (which request all maps) every 15 minutes will result in less than 4,000 daily calls due to **met-office-weather-map's** caching. However, it is possible that the same code could make a little more than 100 calls in a minute at times when new versions of all maps become available at the same time.
+Calling the above Example Harness (which request all maps) every 15 minutes will result in less than 4,000 daily calls due to **met-office-weather-map's** caching. However, it is possible that the same code could make a little more than 100 calls in a minute at times when new versions of all maps become available at the same time and if your web server is especially fast.
 
-Given this I would advise users not to request all maps as above but instead what they need. This should not pose an issue given the similarity of some of the maps (e.g. CloudCoverAndRainfallForecastMap vs CloudCoverForecastMap & RainfallForecastMap, SurfacePressureExtendedForecastMap vs SurfacePressureForecastMap).
+Given this I would advise users not to request all maps as above but instead what they need to prevent their account from being banned. This should not pose an issue given the similarity of some of the maps (e.g. CloudCoverAndRainfallForecastMap vs CloudCoverForecastMap & RainfallForecastMap, SurfacePressureExtendedForecastMap vs SurfacePressureForecastMap).
