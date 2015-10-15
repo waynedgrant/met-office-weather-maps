@@ -131,6 +131,6 @@ foreach ($maps as $map) {
 
 At the time of writing the [DataPoint Terms and Conditions](http://www.metoffice.gov.uk/datapoint/terms-conditions) state fair use for a single API Key is up to 5,000 web service calls a day and up to 100 calls in a single minute.
 
-Calling the above Example Harness (which request all maps) every 15 minutes will result in less than 4,000 daily calls due to **met-office-weather-map's** caching. However, it is possible that the same code could make a little more than 100 calls in a minute at times when new versions of all maps become available at the same time and if your web server is especially fast.
+Calling the above Example Harness (which request all maps) every 15 minutes will result in less than 4,000 daily calls due to **met-office-weather-map's** caching. However, it is possible that the same code could make a little more than 100 calls in a minute at times when new versions of all maps become available simultaneously and if your web server is especially fast.
 
 Given this I would advise users not to request all maps as above but instead only what they need. This will prevent their account from being banned. This should not pose an issue for most use cases given the similarity of some of the maps (e.g. CloudCoverAndRainfallForecastMap vs CloudCoverForecastMap & RainfallForecastMap, SurfacePressureExtendedForecastMap vs SurfacePressureForecastMap).
