@@ -42,12 +42,12 @@ abstract class LayerMap extends Map
 
     protected function getThumbnailWidth()
     {
-        return 200;
+        return 150;
     }
 
     protected function getThumbnailHeight()
     {
-        return 200;
+        return 150;
     }
 }
 

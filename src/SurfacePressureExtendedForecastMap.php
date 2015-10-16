@@ -61,12 +61,12 @@ class SurfacePressureExtendedForecastMap extends Map
 
     protected function getThumbnailWidth()
     {
-        return 297;
+        return 222;
     }
 
     protected function getThumbnailHeight()
     {
-        return 200;
+        return 150;
     }
 
     protected function requiresTimestamp()
