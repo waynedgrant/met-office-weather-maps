@@ -88,21 +88,6 @@ After construction of any of the classes simply call the **fetch()** method on i
 * __0-thumbnail.gif ... n-thumbnail.gif__ latest time series image thumbnails for map in gif format and in time order
 * __animated.gif__ animated gif of all time series images with a two second frame rate
 
-## Image Reference
-
-| PHP Class                          | Base Map Image    | Overlay Map Image                | Available Formats | Width/Height  | Thumbnail Width/Height |
-|------------------------------------|-------------------|----------------------------------|-------------------|---------------|------------------------|
-| CloudCoverAndRainfallForecastMap   | uk_base_colour    | uk_overlay_black_full_outline    | gif, png          | 500, 500      | 150, 150               |
-| CloudCoverForecastMap              | uk_base_colour    | uk_overlay_black_full_outline    | gif, png          | 500, 500      | 150, 150               |
-| InfraredSatelliteObservationMap    | N/A               | uk_overlay_yellow_cutout_outline | gif, png          | 500, 500      | 150, 150               |
-| LightningObservationMap            | uk_base_greyscale | N/A                              | gif, png          | 500, 500      | 150, 150               |
-| RainfallForecastMap                | uk_base_colour    | uk_overlay_black_full_outline    | gif, png          | 500, 500      | 150, 150               |
-| RainfallObservationMap             | uk_base_colour    | uk_overlay_black_full_outline    | gif, png          | 500, 500      | 150, 150               |
-| SurfacePressureExtendedForecastMap | N/A               | N/A                              | gif               | 891, 601      | 222, 150               |
-| SurfacePressureForecastMap         | uk_base_greyscale | N/A                              | gif, png          | 500, 500      | 150, 150               |
-| TemperatureForecastMap             | uk_base_greyscale | uk_overlay_black_full_outline    | gif, png          | 500, 500      | 150, 150               |
-| VisibleSatelliteObservationMap     | N/A               | uk_overlay_yellow_cutout_outline | gif, png          | 500, 500      | 150, 150               |
-
 ## Example Harness
 
 This example harness code will fetch a selection of maps into separate folders (replace with your own DataPoint API Key).
@@ -143,3 +128,35 @@ At the time of writing the [DataPoint Terms and Conditions](http://www.metoffice
 Calling a harness that requests all map types every 15 minutes will result in less than 4,000 daily calls due to **met-office-weather-map's** caching. However, it is possible that the same code could make a little more than 100 calls in a minute at times when new versions of all maps become available simultaneously and if your web server is especially fast.
 
 Given this I would advise **met-office-weather-map's** users not to request all maps as above but instead only what they need. This will prevent their account from being banned. This should not pose an issue for most use cases given the similarity of some of the maps (e.g. CloudCoverAndRainfallForecastMap vs CloudCoverForecastMap & RainfallForecastMap, SurfacePressureExtendedForecastMap vs SurfacePressureForecastMap).
+
+## Image Reference
+
+### Base and Overlay Map Images
+
+| PHP Class                          | Base Map Image    | Overlay Map Image                |
+|------------------------------------|-------------------|----------------------------------|
+| CloudCoverAndRainfallForecastMap   | uk_base_colour    | uk_overlay_black_full_outline    |
+| CloudCoverForecastMap              | uk_base_colour    | uk_overlay_black_full_outline    |
+| InfraredSatelliteObservationMap    | N/A               | uk_overlay_yellow_cutout_outline |
+| LightningObservationMap            | uk_base_greyscale | N/A                              |
+| RainfallForecastMap                | uk_base_colour    | uk_overlay_black_full_outline    |
+| RainfallObservationMap             | uk_base_colour    | uk_overlay_black_full_outline    |
+| SurfacePressureExtendedForecastMap | N/A               | N/A                              |
+| SurfacePressureForecastMap         | uk_base_greyscale | N/A                              |
+| TemperatureForecastMap             | uk_base_greyscale | uk_overlay_black_full_outline    |
+| VisibleSatelliteObservationMap     | N/A               | uk_overlay_yellow_cutout_outline |
+
+### Output Image Formats and Sizes
+
+| PHP Class                          | Available Formats | Width/Height  | Thumbnail Width/Height |
+|------------------------------------|-------------------|---------------|------------------------|
+| CloudCoverAndRainfallForecastMap   | gif, png          | 500, 500      | 150, 150               |
+| CloudCoverForecastMap              | gif, png          | 500, 500      | 150, 150               |
+| InfraredSatelliteObservationMap    | gif, png          | 500, 500      | 150, 150               |
+| LightningObservationMap            | gif, png          | 500, 500      | 150, 150               |
+| RainfallForecastMap                | gif, png          | 500, 500      | 150, 150               |
+| RainfallObservationMap             | gif, png          | 500, 500      | 150, 150               |
+| SurfacePressureExtendedForecastMap | gif               | 891, 601      | 222, 150               |
+| SurfacePressureForecastMap         | gif, png          | 500, 500      | 150, 150               |
+| TemperatureForecastMap             | gif, png          | 500, 500      | 150, 150               |
+| VisibleSatelliteObservationMap     | gif, png          | 500, 500      | 150, 150               |
