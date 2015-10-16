@@ -59,25 +59,27 @@ These instructions can be followed to set up **met-office-weather-maps** on a re
 
 ## API
 
-| PHP Class                          | Image Formats | DataPoint Reference                                                            |
-|------------------------------------|---------------|--------------------------------------------------------------------------------|
-| CloudCoverAndRainfallForecastMap   | gif, png      | N/A                                                                            |
-| CloudCoverForecastMap              | gif, png      | http://www.metoffice.gov.uk/datapoint/product/cloud-cover-forecast-map-layer   |
-| InfraredSatelliteObservationMap    | gif, png      | http://www.metoffice.gov.uk/datapoint/product/satellite-infrared-map-layer     |
-| LightningObservationMap            | gif, png      | http://www.metoffice.gov.uk/datapoint/product/lightning-strike-map-layer       |
-| RainfallForecastMap                | gif, png      | http://www.metoffice.gov.uk/datapoint/product/precipitation-forecast-map-layer |
-| RainfallObservationMap             | gif, png      | http://www.metoffice.gov.uk/datapoint/product/rainfall-radar-map-layer         |
-| SurfacePressureExtendedForecastMap | gif           | http://www.metoffice.gov.uk/datapoint/product/surface-pressure-charts          |
-| SurfacePressureForecastMap         | gif, png      | http://www.metoffice.gov.uk/datapoint/product/pressure-forecast-map-layer      |
-| TemperatureForecastMap             | gif, png      | http://www.metoffice.gov.uk/datapoint/product/temperature-forecast-map-layer   |
-| VisibleSatelliteObservationMap     | gif, png      | http://www.metoffice.gov.uk/datapoint/product/satellite-visible-map-layer      |
+The following PHP classes are available with corresponding to a map available from DataPoint:
+
+| PHP Class                          | DataPoint Reference                                                                                        |
+|------------------------------------|------------------------------------------------------------------------------------------------------------|
+| CloudCoverAndRainfallForecastMap   | N/A                                                                                                        |
+| CloudCoverForecastMap              | [Total cloud cover forecast](http://www.metoffice.gov.uk/datapoint/product/cloud-cover-forecast-map-layer) |
+| InfraredSatelliteObservationMap    | [Infrared satellite](http://www.metoffice.gov.uk/datapoint/product/satellite-infrared-map-layer)           |
+| LightningObservationMap            | [Lightning strikes](http://www.metoffice.gov.uk/datapoint/product/lightning-strike-map-layer)              |
+| RainfallForecastMap                | [Precipitation forecast](http://www.metoffice.gov.uk/datapoint/product/precipitation-forecast-map-layer)   |
+| RainfallObservationMap             | [Rainfall radar](http://www.metoffice.gov.uk/datapoint/product/rainfall-radar-map-layer)                   |
+| SurfacePressureExtendedForecastMap | [Surface pressure charts](http://www.metoffice.gov.uk/datapoint/product/surface-pressure-charts)           |
+| SurfacePressureForecastMap         | [Pressure forecast](http://www.metoffice.gov.uk/datapoint/product/pressure-forecast-map-layer)             |
+| TemperatureForecastMap             | [Temperature forecast](http://www.metoffice.gov.uk/datapoint/product/temperature-forecast-map-layer)       |
+| VisibleSatelliteObservationMap     | [Visible satellite](http://www.metoffice.gov.uk/datapoint/product/satellite-visible-map-layer)             |
 
 All class constructors take the same two mandatory parameters:
 
 * __apiKey__ Your DataPoint API Key
 * __workingFolder__ The folder to output map images to. Note each class instance must use a different working folder or their output will clash
 
-After construction of any of the classes simply call the **fetch()** method on it to fetch all images for the given map. After a successful fetch the **workingFolder** will contain the following files:
+After construction of any of the classes simply call the **fetch()** method on it to fetch all images for the given map. After a successful fetch the **workingFolder** (which will be created automatically if necessary) will contain the following files:
 
 * __timestamp.txt__ cached timestamp file
 * __0.png ... n.png__ latest time series images for map in png format and in time order
@@ -86,21 +88,32 @@ After construction of any of the classes simply call the **fetch()** method on i
 * __0-thumbnail.gif ... n-thumbnail.gif__ latest time series image thumbnails for map in gif format and in time order
 * __animated.gif__ animated gif of all time series images with a two second frame rate
 
+## Image Reference
+
+| PHP Class                          | Base Map Image    | Overlay Map Image                | Available Formats | Width/Height  | Thumbnail Width/Height |
+|------------------------------------|-------------------|----------------------------------|-------------------|---------------|------------------------|
+| CloudCoverAndRainfallForecastMap   | uk_base_colour    | uk_overlay_black_full_outline    | gif, png          | 500, 500      | 150, 150               |
+| CloudCoverForecastMap              | uk_base_colour    | uk_overlay_black_full_outline    | gif, png          | 500, 500      | 150, 150               |
+| InfraredSatelliteObservationMap    | N/A               | uk_overlay_yellow_cutout_outline | gif, png          | 500, 500      | 150, 150               |
+| LightningObservationMap            | uk_base_greyscale | N/A                              | gif, png          | 500, 500      | 150, 150               |
+| RainfallForecastMap                | uk_base_colour    | uk_overlay_black_full_outline    | gif, png          | 500, 500      | 150, 150               |
+| RainfallObservationMap             | uk_base_colour    | uk_overlay_black_full_outline    | gif, png          | 500, 500      | 150, 150               |
+| SurfacePressureExtendedForecastMap | N/A               | N/A                              | gif               | 891, 601      | 222, 150               |
+| SurfacePressureForecastMap         | uk_base_greyscale | N/A                              | gif, png          | 500, 500      | 150, 150               |
+| TemperatureForecastMap             | uk_base_greyscale | uk_overlay_black_full_outline    | gif, png          | 500, 500      | 150, 150               |
+| VisibleSatelliteObservationMap     | N/A               | uk_overlay_yellow_cutout_outline | gif, png          | 500, 500      | 150, 150               |
+
 ## Example Harness
 
-This example harness code will fetch all available maps into separate folders (replace with your own DataPoint API Key).
+This example harness code will fetch a selection of maps into separate folders (replace with your own DataPoint API Key).
 
 ```php
 <?php
 
 require_once('CloudCoverAndRainfallForecastMap.php');
-require_once('CloudCoverForecastMap.php');
 require_once('InfraredSatelliteObservationMap.php');
-require_once('LightningObservationMap.php');
-require_once('RainfallForecastMap.php');
 require_once('RainfallObservationMap.php');
 require_once('SurfacePressureExtendedForecastMap.php');
-require_once('SurfacePressureForecastMap.php');
 require_once('TemperatureForecastMap.php');
 require_once('VisibleSatelliteObservationMap.php');
 
@@ -110,13 +123,9 @@ $dirName = dirname(__FILE__ );
 
 $maps = array(
     new CloudCoverAndRainfallForecastMap(API_KEY, $dirName . '/cloud-rain-fcast'),
-    new CloudCoverForecastMap(API_KEY, $dirName . '/cloud-fcast'),
     new InfraredSatelliteObservationMap(API_KEY, $dirName . '/ir-sat-obs'),
-    new LightningObservationMap(API_KEY, $dirName . '/lightning-obs'),
-    new RainfallForecastMap(API_KEY, $dirName . '/rain-fcast'),
     new RainfallObservationMap(API_KEY, $dirName . '/rain-obs'),
     new SurfacePressureExtendedForecastMap(API_KEY, $dirName . '/ext-pressure-fcast'),
-    new SurfacePressureForecastMap(API_KEY, $dirName . '/pressure-fcast'),
     new TemperatureForecastMap(API_KEY, $dirName . '/temp-fcast'),
     new VisibleSatelliteObservationMap(API_KEY, $dirName . '/vis-sat-obs'));
 
@@ -131,6 +140,6 @@ foreach ($maps as $map) {
 
 At the time of writing the [DataPoint Terms and Conditions](http://www.metoffice.gov.uk/datapoint/terms-conditions) state fair use for a single API Key is up to 5,000 web service calls a day and up to 100 calls in a single minute.
 
-Calling the above Example Harness (which request all maps) every 15 minutes will result in less than 4,000 daily calls due to **met-office-weather-map's** caching. However, it is possible that the same code could make a little more than 100 calls in a minute at times when new versions of all maps become available simultaneously and if your web server is especially fast.
+Calling a harness that requests all map types every 15 minutes will result in less than 4,000 daily calls due to **met-office-weather-map's** caching. However, it is possible that the same code could make a little more than 100 calls in a minute at times when new versions of all maps become available simultaneously and if your web server is especially fast.
 
-Given this I would advise users not to request all maps as above but instead only what they need. This will prevent their account from being banned. This should not pose an issue for most use cases given the similarity of some of the maps (e.g. CloudCoverAndRainfallForecastMap vs CloudCoverForecastMap & RainfallForecastMap, SurfacePressureExtendedForecastMap vs SurfacePressureForecastMap).
+Given this I would advise **met-office-weather-map's** users not to request all maps as above but instead only what they need. This will prevent their account from being banned. This should not pose an issue for most use cases given the similarity of some of the maps (e.g. CloudCoverAndRainfallForecastMap vs CloudCoverForecastMap & RainfallForecastMap, SurfacePressureExtendedForecastMap vs SurfacePressureForecastMap).
