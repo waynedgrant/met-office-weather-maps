@@ -146,7 +146,7 @@ Given this I would advise **met-office-weather-map's** users not to request all 
 | TemperatureForecastMap             | uk base greyscale | uk overlay black full outline    |
 | VisibleSatelliteObservationMap     | N/A               | uk overlay yellow cutout outline |
 
-### Output Image Formats and Sizes
+### Output Map Image Formats and Sizes
 
 | PHP Class                          | Available Formats | Width/Height  | Thumbnail Width/Height |
 |------------------------------------|-------------------|---------------|------------------------|
