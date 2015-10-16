@@ -135,16 +135,16 @@ Given this I would advise **met-office-weather-map's** users not to request all 
 
 | PHP Class                          | Base Map Image    | Overlay Map Image                |
 |------------------------------------|-------------------|----------------------------------|
-| CloudCoverAndRainfallForecastMap   | uk_base_colour    | uk_overlay_black_full_outline    |
-| CloudCoverForecastMap              | uk_base_colour    | uk_overlay_black_full_outline    |
-| InfraredSatelliteObservationMap    | N/A               | uk_overlay_yellow_cutout_outline |
-| LightningObservationMap            | uk_base_greyscale | N/A                              |
-| RainfallForecastMap                | uk_base_colour    | uk_overlay_black_full_outline    |
-| RainfallObservationMap             | uk_base_colour    | uk_overlay_black_full_outline    |
+| CloudCoverAndRainfallForecastMap   | uk base colour    | uk overlay black full outline    |
+| CloudCoverForecastMap              | uk base colour    | uk overlay black full outline    |
+| InfraredSatelliteObservationMap    | N/A               | uk overlay yellow cutout outline |
+| LightningObservationMap            | uk base greyscale | N/A                              |
+| RainfallForecastMap                | uk base colour    | uk overlay black full outline    |
+| RainfallObservationMap             | uk base colour    | uk overlay black full outline    |
 | SurfacePressureExtendedForecastMap | N/A               | N/A                              |
-| SurfacePressureForecastMap         | uk_base_greyscale | N/A                              |
-| TemperatureForecastMap             | uk_base_greyscale | uk_overlay_black_full_outline    |
-| VisibleSatelliteObservationMap     | N/A               | uk_overlay_yellow_cutout_outline |
+| SurfacePressureForecastMap         | uk base greyscale | N/A                              |
+| TemperatureForecastMap             | uk base greyscale | uk overlay black full outline    |
+| VisibleSatelliteObservationMap     | N/A               | uk overlay yellow cutout outline |
 
 ### Output Image Formats and Sizes
 
