@@ -49,13 +49,13 @@ For more examples of **met-office-weather-maps** in action see [http://www.wayne
 
 ## Installation
 
-These instructions can be followed to set up **met-office-weather-maps** on a regular schedule on a generic LAMP stack web server.
+These instructions can be used to set up **met-office-weather-maps** on a regular schedule on a generic LAMP stack web server.
 
 * Download the source code for the [latest release](https://github.com/waynedgrant/met-office-weather-maps/releases) and unzip it
 * Retrieve a copy of [GifCreator.php](https://github.com/Sybio/GifCreator/blob/master/src/GifCreator/GifCreator.php) by **Clément Guillemain** and place it in the unzipped **met-office-weather-maps/src** directory
 * Write a harness in PHP to fetch the maps you require (see **API** and **Example Harness** below and pay heed to the advice in **Fair Use Notes**)
 * Upload all files in **met-office-weather-maps/src** and your **harness** to a directory on your web server
-* Set up a cron schedule to kick off your harness regularly (e.g every 15 minutes)
+* Set up a cron schedule to kick off your **harness** regularly (e.g every 15 minutes)
 
 ## API
 
@@ -77,7 +77,7 @@ The following PHP classes are available with corresponding to a map available fr
 All class constructors take the same two mandatory parameters:
 
 * __apiKey__ Your DataPoint API Key
-* __workingFolder__ The folder to output map images to. Note each class instance must use a different working folder or their output will clash
+* __workingFolder__ The folder to output map images to. Note each class instance must use a different working folder or their outputs will overwrite each other
 
 After construction of any of the classes simply call the **fetch()** method on it to fetch all images for the given map. After a successful fetch the **workingFolder** (which will be created automatically if necessary) will contain the following files:
 
@@ -125,9 +125,9 @@ foreach ($maps as $map) {
 
 At the time of writing the [DataPoint Terms and Conditions](http://www.metoffice.gov.uk/datapoint/terms-conditions) state fair use for a single API Key is up to 5,000 web service calls a day and up to 100 calls in a single minute.
 
-Calling a harness that requests all map types every 15 minutes will result in less than 4,000 daily calls due to **met-office-weather-map's** caching. However, it is possible that the same code could make a little more than 100 calls in a minute at times when new versions of all maps become available simultaneously and if your web server is especially fast.
+Calling a harness that requests all map types every 15 minutes will result in less than 4,000 daily calls (a smaller number than it would be otherwise because of **met-office-weather-map's** caching). However, it is possible that the same code could make more than 100 calls in a minute at times when new versions of all maps become available simultaneously and if your web server is especially fast.
 
-Given this I would advise **met-office-weather-map's** users not to request all maps as above but instead only what they need. This will prevent their account from being banned. This should not pose an issue for most use cases given the similarity of some of the maps (e.g. CloudCoverAndRainfallForecastMap vs CloudCoverForecastMap & RainfallForecastMap, SurfacePressureExtendedForecastMap vs SurfacePressureForecastMap).
+Given this I would advise **met-office-weather-map's** users not to request all maps as above but instead only what they need. This will prevent their DataPoint account from being banned. This should not pose an issue for most use cases given the similarity of some of the maps (e.g. CloudCoverAndRainfallForecastMap vs CloudCoverForecastMap & RainfallForecastMap, SurfacePressureExtendedForecastMap vs SurfacePressureForecastMap).
 
 ## Image Reference
 
