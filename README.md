@@ -13,18 +13,14 @@ The [Met Office](http://www.metoffice.gov.uk) provide the [DataPoint](http://www
 These maps make a great addition to any UK-centric weather website. However, there are several common issues the API's users may have to overcome:
 
 1. Most of the map images are simple layers with no UK map. Users have to supply their own UK base and/or overlay map images that conform to the required boundary box.
-2. DataPoint has fair use call limits and map types can have very different update schedules. Users have to create call schedules that keep their website's maps up-to-date but do not exceed the fair use call limit.
-3. All of the maps are available as a time series. However, there is no option to request an animated image that combines an entire time series.
-4. Most of the map images are simple layers with no visual indication as to what time they are relevant for.
-5. A large collection of map images can be quite large and bandwidth intensive when referred to directly from a hosting web page.
+2. Most of the map images have no visual indication as to what time they are relevant for.
+3. DataPoint has fair use call limits and map types can have very different update schedules. Users have to create call schedules that keep their website's maps up-to-date but do not exceed the fair use call limit.
 
 **met-office-weather-maps** solves each of these issues:
 
 1. Map images available only as simple layers are processed by **met-office-weather-maps** which adds appropriate UK base and/or overlay images for the required boundary box.
-2. **met-office-weather-maps** queries DataPoint's capabilities API and caches the timestamps of all web service calls so that it only fetches map images when new versions are available. This greatly reduces the number of DataPoint web service calls even if **met-office-weather-maps** is called on a frequent schedule.
-3. **met-office-weather-maps** automatically creates a GIF animation of each map time series it fetches.
-4. Where map images are not timestamped **met-office-weather-maps** automatically adds a UTC date/time to the top-left corner.
-5. **met-office-weather-maps** automatically creates thumbnails of all map images.
+2. Where map images are not timestamped **met-office-weather-maps** automatically adds a UTC date/time to the top-left corner.
+3. **met-office-weather-maps** queries DataPoint's capabilities API and caches the timestamps of all web service calls so that it only fetches map images when new versions are available. This greatly reduces the number of DataPoint web service calls even if **met-office-weather-maps** is called on a frequent schedule.
 
 For example, when this raw layer for precipitation is fetched from DataPoint:
 
@@ -33,10 +29,6 @@ For example, when this raw layer for precipitation is fetched from DataPoint:
 **met-office-weather-maps** will create a processed image similar to:
 
 ![alt tag](precipitation_processed.png)
-
-and an animated GIF for the entire time series of precipitation images:
-
-![alt tag](precipitation_animated.gif)
 
 The original use case for **met-office-weather-maps** was as a scheduled job to keep the weather maps on my own weather web site up-to-date. The following instructions concentrate on this particular scenario.
 
@@ -52,7 +44,6 @@ For more examples of **met-office-weather-maps** in action see [http://www.wayne
 These instructions can be used to set up **met-office-weather-maps** on a regular schedule on a generic LAMP stack web server.
 
 * Download the source code for the [latest release](https://github.com/waynedgrant/met-office-weather-maps/releases) and unzip it
-* Retrieve a copy of [GifCreator.php](https://github.com/Sybio/GifCreator/blob/master/src/GifCreator/GifCreator.php) by **Clément Guillemain** and place it in the unzipped **met-office-weather-maps/src** directory
 * Write a harness in PHP to fetch the maps you require (see **API** and **Example Harness** below and pay heed to the advice in **Fair Use Notes**)
 * Upload all files in **met-office-weather-maps/src** and your **harness** to a directory on your web server
 * Set up a cron schedule to kick off your **harness** regularly (e.g every 15 minutes)
@@ -81,12 +72,8 @@ All class constructors take the same two mandatory parameters:
 
 After construction of any of the classes simply call the **fetch()** method on it to fetch all images for the given map. After a successful fetch the **workingFolder** (which will be created automatically if necessary) will contain the following files:
 
-* __timestamp.txt__ cached timestamp file
-* __0.png ... n.png__ latest time series images for map in png format and in time order
-* __0-thumbnail.png ... n-thumbnail.png__ latest time series image thumbnails for map in png format and in time order
-* __0.gif ... n.gif__ latest time series images for map in gif format and in time order
-* __0-thumbnail.gif ... n-thumbnail.gif__ latest time series image thumbnails for map in gif format and in time order
-* __animated.gif__ animated gif of all time series images with a two second frame rate
+* __timestamp.txt__ - cached timestamp file
+* __0.png ... n.png__ or __0.gif ... n.gif - time series images for map in time order
 
 ## Example Harness
 
@@ -148,15 +135,15 @@ Given this I would advise **met-office-weather-map's** users not to request all 
 
 ### Output Map Image Formats and Sizes
 
-| PHP Class                          | Available Formats | Width/Height  | Thumbnail Width/Height |
-|------------------------------------|-------------------|---------------|------------------------|
-| CloudCoverAndRainfallForecastMap   | gif, png          | 500, 500      | 150, 150               |
-| CloudCoverForecastMap              | gif, png          | 500, 500      | 150, 150               |
-| InfraredSatelliteObservationMap    | gif, png          | 500, 500      | 150, 150               |
-| LightningObservationMap            | gif, png          | 500, 500      | 150, 150               |
-| RainfallForecastMap                | gif, png          | 500, 500      | 150, 150               |
-| RainfallObservationMap             | gif, png          | 500, 500      | 150, 150               |
-| SurfacePressureExtendedForecastMap | gif               | 891, 601      | 222, 150               |
-| SurfacePressureForecastMap         | gif, png          | 500, 500      | 150, 150               |
-| TemperatureForecastMap             | gif, png          | 500, 500      | 150, 150               |
-| VisibleSatelliteObservationMap     | gif, png          | 500, 500      | 150, 150               |
+| PHP Class                          | Format | Width/Height |
+|------------------------------------|--------|--------------|
+| CloudCoverAndRainfallForecastMap   | png    | 500, 500     |
+| CloudCoverForecastMap              | png    | 500, 500     |
+| InfraredSatelliteObservationMap    | png    | 500, 500     |
+| LightningObservationMap            | png    | 500, 500     |
+| RainfallForecastMap                | png    | 500, 500     |
+| RainfallObservationMap             | png    | 500, 500     |
+| SurfacePressureExtendedForecastMap | gif    | 891, 601     |
+| SurfacePressureForecastMap         | png    | 500, 500     |
+| TemperatureForecastMap             | png    | 500, 500     |
+| VisibleSatelliteObservationMap     | png    | 500, 500     |
