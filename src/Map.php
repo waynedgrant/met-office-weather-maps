@@ -3,9 +3,6 @@
 # Copyright 2015 Wayne D Grant (www.waynedgrant.com)
 # Licensed under the MIT License
 
-require_once('GifCreator.php');
-use GifCreator\GifCreator;
-
 abstract class Map
 {
     protected $apiKey;
@@ -33,9 +30,6 @@ abstract class Map
         {
             $timesteps = $this->getAvailableTimesteps($mapCapabilities);
 
-            $downloadedMaps = array();
-            $animationDurations = array();
-
             $index = 0;
 
             foreach ($timesteps as $timestep)
@@ -48,12 +42,8 @@ abstract class Map
 
                 $this->processMap($downloadedMap, $lastestTimestamp, $timestep);
 
-                $downloadedMaps[] = $downloadedMap;
-                $animationDurations[] = 200; // 2 seconds per frame
                 $index++;
             }
-
-            $this->animateMaps($downloadedMaps, $animationDurations, $this->flipAnimation());
         }
     }
 
@@ -63,13 +53,10 @@ abstract class Map
     abstract protected function getImageFormat();
     abstract protected function getWidth();
     abstract protected function getHeight();
-    abstract protected function getThumbnailWidth();
-    abstract protected function getThumbnailHeight();
     abstract protected function getMapImageUrl($timestep, $timestamp);
     abstract protected function getBaseMap();
     abstract protected function getOverlayMap();
     abstract protected function requiresTimestamp();
-    abstract protected function flipAnimation();
 
     private function getCurrentTimestamp()
     {
@@ -114,13 +101,6 @@ abstract class Map
             $mapDateTime = $this->calculateMapDateTime($timestamp, $timestep);
             $this->timestampMap($mapFile, $mapDateTime);
         }
-
-        $thumbnailMap = $this->createThumbnail($mapFile);
-
-        if ($this->getImageFormat() == 'png')
-        {
-            $this->createGifMap($thumbnailMap);
-        }
     }
 
     private function addBaseMap($mapFile, $baseMapFile)
@@ -145,43 +125,6 @@ abstract class Map
         {
             return $this->createDateTime($timestep);
         }
-    }
-
-    private function createThumbnail($mapFile)
-    {
-        if ($this->getImageFormat() == 'png')
-        {
-            $map = imagecreatefrompng($mapFile);
-        }
-        else
-        {
-            $map = imagecreatefromgif($mapFile);
-        }
-
-        $thumbnail = imagecreatetruecolor($this->getThumbnailWidth(), $this->getThumbnailHeight());
-
-        imagecopyresampled(
-            $thumbnail, $map, 0, 0, 0, 0,
-            $this->getThumbnailWidth(),
-            $this->getThumbnailHeight(),
-            $this->getWidth(),
-            $this->getHeight());
-
-        if ($this->getImageFormat() == 'png')
-        {
-            $thumbnailFile = str_replace('.png', '-thumbnail.png', $mapFile);
-            imagepng($thumbnail, $thumbnailFile);
-        }
-        else
-        {
-            $thumbnailFile = str_replace('.gif', '-thumbnail.gif', $mapFile);
-            imagegif($thumbnail, $thumbnailFile);
-        }
-
-        imagedestroy($map);
-        imagedestroy($thumbnail);
-
-        return $thumbnailFile;
     }
 
     private function createDateTime($timestamp)
@@ -225,59 +168,6 @@ abstract class Map
         imagepng($map, $mapFile);
 
         imagedestroy($map);
-    }
-
-    private function animateMaps($downloadedMaps, $animationDurations, $flipAnimation)
-    {
-        if ($this->getImageFormat() == 'png')
-        {
-            $downloadedMaps = $this->createGifMaps($downloadedMaps);
-        }
-
-        if ($flipAnimation)
-        {
-            $maps = array();
-
-            for ($i = count($downloadedMaps)-1; $i >= 0; $i--)
-            {
-                $maps[] = $downloadedMaps[$i];
-            }
-        }
-        else
-        {
-            $maps = $downloadedMaps;
-        }
-
-        $gifCreator = new GifCreator();
-        $gifCreator->create($maps, $animationDurations, 0);
-
-        $animatedMapFile = $this->workingFolder . '/animated.gif';
-        file_put_contents($animatedMapFile, $gifCreator->getGif());
-    }
-
-    private function createGifMaps($pngMapFiles)
-    {
-        $gifMaps = array();
-
-        foreach ($pngMapFiles as $pngMapFile)
-        {
-            $gifMapFile = $this->createGifMap($pngMapFile);
-            $gifMaps[] = $gifMapFile;
-        }
-
-        return $gifMaps;
-    }
-
-    private function createGifMap($pngMapFile)
-    {
-        $png = imagecreatefrompng($pngMapFile);
-        $gifMapFile = str_replace('.png', '.gif', $pngMapFile);
-
-        imagegif($png, $gifMapFile);
-
-        imagedestroy($png);
-
-        return $gifMapFile;
     }
 }
 

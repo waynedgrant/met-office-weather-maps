@@ -59,16 +59,6 @@ class SurfacePressureExtendedForecastMap extends Map
         return 601;
     }
 
-    protected function getThumbnailWidth()
-    {
-        return 222;
-    }
-
-    protected function getThumbnailHeight()
-    {
-        return 150;
-    }
-
     protected function requiresTimestamp()
     {
         return false;
@@ -82,11 +72,6 @@ class SurfacePressureExtendedForecastMap extends Map
     protected function getOverlayMap()
     {
         return null;
-    }
-
-    protected function flipAnimation()
-    {
-        return false;
     }
 }
 

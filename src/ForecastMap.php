@@ -42,11 +42,6 @@ abstract class ForecastMap extends LayerMap
             'http://datapoint.metoffice.gov.uk/public/data/layer/wxfcs/{0}/{1}?RUN={2}Z&FORECAST={3}&key={4}',
             array($this->getLayerName(), $this->getImageFormat(), $timestamp, $timestep, $this->apiKey));
     }
-
-    protected function flipAnimation()
-    {
-        return false;
-    }
 }
 
 ?>

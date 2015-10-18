@@ -40,12 +40,6 @@ abstract class ObservationMap extends LayerMap
             array($this->getLayerName(), $timestep, $this->apiKey));
     }
 
-    protected function flipAnimation()
-    {
-        return true;
-    }
-
-
     abstract protected function getLayerName();
 }
 

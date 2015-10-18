@@ -39,16 +39,6 @@ abstract class LayerMap extends Map
     {
         return 500;
     }
-
-    protected function getThumbnailWidth()
-    {
-        return 150;
-    }
-
-    protected function getThumbnailHeight()
-    {
-        return 150;
-    }
 }
 
 ?>
