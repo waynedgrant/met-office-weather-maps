@@ -22,11 +22,6 @@ class SurfacePressureForecastMap extends ForecastMap
         return true;
     }
 
-    protected function getBaseMap()
-    {
-        return "uk_base_greyscale.png";
-    }
-
     protected function getOverlayMap()
     {
         return null;

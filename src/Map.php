@@ -137,7 +137,7 @@ abstract class Map
 
         $dateTime = $year . '-' . $month . '-' . $day . ' ' . $hour . ':' . $minute . ':00';
 
-        return date_create($dateTime, timezone_open("UTC"));
+        return date_create($dateTime, timezone_open('UTC'));
     }
 
     private function combineMaps($topMapFile, $bottomMapFile, $outputMapFile)

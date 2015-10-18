@@ -24,12 +24,12 @@ class TemperatureForecastMap extends ForecastMap
 
     protected function getBaseMap()
     {
-        return 'uk_base_greyscale.png';
+        return 'uk_base_colour.png';
     }
 
     protected function getOverlayMap()
     {
-        return "uk_overlay_black_full_outline.png";
+        return 'uk_overlay_black_full_outline.png';
     }
 }
 

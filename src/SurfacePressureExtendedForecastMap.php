@@ -46,7 +46,7 @@ class SurfacePressureExtendedForecastMap extends Map
 
     protected function getImageFormat()
     {
-        return "gif";
+        return 'gif';
     }
 
     protected function getWidth()

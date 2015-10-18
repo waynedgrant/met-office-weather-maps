@@ -27,7 +27,7 @@ abstract class LayerMap extends Map
 
     protected function getImageFormat()
     {
-        return "png";
+        return 'png';
     }
 
     protected function getWidth()

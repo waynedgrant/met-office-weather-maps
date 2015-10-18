@@ -77,7 +77,7 @@ After construction of any of the classes simply call the **fetch()** method on i
 
 ## Example Harness
 
-This example harness code will fetch a selection of maps into separate folders (replace with your own DataPoint API Key).
+This example harness code will fetch a selection of maps into separate folders under **fetched** (replace with your own DataPoint API Key).
 
 ```php
 <?php
@@ -91,15 +91,15 @@ require_once('VisibleSatelliteObservationMap.php');
 
 define(API_KEY, 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee');
 
-$dirName = dirname(__FILE__ );
+$fetchFolderName = dirname(__FILE__ ) . '/fetched/';
 
 $maps = array(
-    new CloudCoverAndRainfallForecastMap(API_KEY, $dirName . '/cloud-rain-fcast'),
-    new InfraredSatelliteObservationMap(API_KEY, $dirName . '/ir-sat-obs'),
-    new RainfallObservationMap(API_KEY, $dirName . '/rain-obs'),
-    new SurfacePressureExtendedForecastMap(API_KEY, $dirName . '/ext-pressure-fcast'),
-    new TemperatureForecastMap(API_KEY, $dirName . '/temp-fcast'),
-    new VisibleSatelliteObservationMap(API_KEY, $dirName . '/vis-sat-obs'));
+    new CloudCoverAndRainfallForecastMap(API_KEY, $fetchFolderName . 'cloud-rain-fcast'),
+    new InfraredSatelliteObservationMap(API_KEY, $fetchFolderName . 'ir-sat-obs'),
+    new RainfallObservationMap(API_KEY, $fetchFolderName . 'rain-obs'),
+    new SurfacePressureExtendedForecastMap(API_KEY, $fetchFolderName . 'ext-pressure-fcast'),
+    new TemperatureForecastMap(API_KEY, $fetchFolderName . 'temp-fcast'),
+    new VisibleSatelliteObservationMap(API_KEY, $fetchFolderName . 'vis-sat-obs'));
 
 foreach ($maps as $map) {
     $map->fetch();
@@ -125,12 +125,12 @@ Given this I would advise **met-office-weather-map's** users not to request all 
 | CloudCoverAndRainfallForecastMap   | uk base colour    | uk overlay black full outline    |
 | CloudCoverForecastMap              | uk base colour    | uk overlay black full outline    |
 | InfraredSatelliteObservationMap    | N/A               | uk overlay yellow cutout outline |
-| LightningObservationMap            | uk base greyscale | N/A                              |
+| LightningObservationMap            | uk base colour    | N/A                              |
 | RainfallForecastMap                | uk base colour    | uk overlay black full outline    |
 | RainfallObservationMap             | uk base colour    | uk overlay black full outline    |
 | SurfacePressureExtendedForecastMap | N/A               | N/A                              |
-| SurfacePressureForecastMap         | uk base greyscale | N/A                              |
-| TemperatureForecastMap             | uk base greyscale | uk overlay black full outline    |
+| SurfacePressureForecastMap         | uk base colour    | N/A                              |
+| TemperatureForecastMap             | uk base colour    | uk overlay black full outline    |
 | VisibleSatelliteObservationMap     | N/A               | uk overlay yellow cutout outline |
 
 ### Output Map Image Formats and Sizes

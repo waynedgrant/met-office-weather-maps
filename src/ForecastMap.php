@@ -36,6 +36,11 @@ abstract class ForecastMap extends LayerMap
 
     abstract protected function getLayerName();
 
+    protected function getBaseMap()
+    {
+        return 'uk_base_colour.png';
+    }
+
     protected function getMapImageUrl($timestep, $timestamp)
     {
         return MessageFormatter::formatMessage('en_GB',

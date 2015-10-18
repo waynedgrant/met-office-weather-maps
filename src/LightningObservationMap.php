@@ -24,7 +24,7 @@ class LightningObservationMap extends ObservationMap
 
     protected function getBaseMap()
     {
-        return "uk_base_greyscale.png";
+        return 'uk_base_colour.png';
     }
 
     protected function getOverlayMap()

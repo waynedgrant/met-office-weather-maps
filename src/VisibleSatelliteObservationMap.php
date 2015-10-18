@@ -29,7 +29,7 @@ class VisibleSatelliteObservationMap extends ObservationMap
 
     protected function getOverlayMap()
     {
-        return "uk_overlay_yellow_cutout_outline.png";
+        return 'uk_overlay_yellow_cutout_outline.png';
     }
 }
 
