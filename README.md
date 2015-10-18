@@ -8,7 +8,7 @@ API to fetch weather maps from the [Met Office](http://www.metoffice.gov.uk) usi
 
 ## Overview
 
-The [Met Office](http://www.metoffice.gov.uk) provide the [DataPoint](http://www.metoffice.gov.uk/datapoint) API which exposes web services that, among other capabilities, allow clients to request a wide selection of time series weather maps for the UK as images.
+The [Met Office](http://www.metoffice.gov.uk) provide the [DataPoint](http://www.metoffice.gov.uk/datapoint) API which exposes web services that, among other capabilities, allows clients to request a wide selection of time series weather maps for the UK as images.
 
 These maps make a great addition to any UK-centric weather website. However, there are several common issues the API's users may have to overcome:
 
