@@ -73,7 +73,7 @@ All class constructors take the same two mandatory parameters:
 After construction of any of the classes simply call the **fetch()** method on it to fetch all images for the given map. After a successful fetch the **workingFolder** (which will be created automatically if necessary) will contain the following files:
 
 * __timestamp.txt__ - cached timestamp file
-* __0.png ... n.png__ or __0.gif ... n.gif - time series images for map in time order
+* __0.png ... n.png__ or __0.gif ... n.gif__ - time series images for map in time order
 
 ## Example Harness
 
