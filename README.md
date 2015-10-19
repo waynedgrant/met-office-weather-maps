@@ -22,15 +22,49 @@ These maps make a great addition to any UK-centric weather website. However, the
 2. Where map images are not timestamped **met-office-weather-maps** automatically adds a UTC date/time to the top-left corner.
 3. **met-office-weather-maps** queries DataPoint's capabilities API and caches the timestamps of all web service calls so that it only fetches map images when new versions are available. This greatly reduces the number of DataPoint web service calls even if **met-office-weather-maps** is called on a frequent schedule.
 
-For example, when this raw layer for precipitation is fetched from DataPoint:
+## Examples
 
-![alt tag](precipitation_layer.png)
+### Surface Pressure Forecast Map
 
-**met-office-weather-maps** will create a processed image similar to:
+Raw layer fetched from DataPoint:
 
-![alt tag](precipitation_processed.png)
+![Surface Pressure Forecast Map - Raw Layer](pressure_fcast_basic.png)
 
-The original use case for **met-office-weather-maps** was as a scheduled job to keep the weather maps on my own weather web site up-to-date. The following instructions concentrate on this particular scenario.
+**met-office-weather-maps** processed image:
+
+![Surface Pressure Forecast Map - Processed Image](pressure_fcast_processed.png)
+
+### Visible Satellite Observation Map
+
+Raw layer fetched from DataPoint:
+
+![Visible Satellite Observation Map - Raw Layer](visible_satellite_obs_basic.png)
+
+**met-office-weather-maps** processed image:
+
+![Visible Satellite Observation Map - Processed Image](visible_satellite_obs_processed.png)
+
+### Temperature Forecast Map
+
+Raw layer fetched from DataPoint:
+
+![Temperature Forecast Map - Raw Layer](temperature_fcast_basic.png)
+
+**met-office-weather-maps** processed image:
+
+![Temperature Forecast Map - Processed Image](temperature_fcast_processed.png)
+
+### Cloud Cover and Rainfall Forecast Map
+
+Raw layer fetched from DataPoint:
+
+![Cloud Cover and Rainfall Forecast Map - Raw Layer](cloud_precipitation_fcast_basic.png)
+
+**met-office-weather-maps** processed image:
+
+![Cloud Cover and Rainfall Forecast Map - Processed Image](cloud_precipitation_fcast_processed.png)
+
+### More Examples
 
 For more examples of **met-office-weather-maps** in action see [http://www.waynedgrant.com/weather](http://www.waynedgrant.com/weather/maps.html).
 
