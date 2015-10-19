@@ -28,41 +28,41 @@ These maps make a great addition to any UK-centric weather website. However, the
 
 Raw layer fetched from DataPoint:
 
-![Surface Pressure Forecast Map - Raw Layer](pressure_fcast_basic.png)
+![Surface Pressure Forecast Map - Raw Layer](examples/pressure_fcast_basic.png)
 
 **met-office-weather-maps** processed image:
 
-![Surface Pressure Forecast Map - Processed Image](pressure_fcast_processed.png)
+![Surface Pressure Forecast Map - Processed Image](examples/pressure_fcast_processed.png)
 
 ### Visible Satellite Observation Map
 
 Raw layer fetched from DataPoint:
 
-![Visible Satellite Observation Map - Raw Layer](visible_satellite_obs_basic.png)
+![Visible Satellite Observation Map - Raw Layer](examples/visible_satellite_obs_basic.png)
 
 **met-office-weather-maps** processed image:
 
-![Visible Satellite Observation Map - Processed Image](visible_satellite_obs_processed.png)
+![Visible Satellite Observation Map - Processed Image](examples/visible_satellite_obs_processed.png)
 
 ### Temperature Forecast Map
 
 Raw layer fetched from DataPoint:
 
-![Temperature Forecast Map - Raw Layer](temperature_fcast_basic.png)
+![Temperature Forecast Map - Raw Layer](examples/temperature_fcast_basic.png)
 
 **met-office-weather-maps** processed image:
 
-![Temperature Forecast Map - Processed Image](temperature_fcast_processed.png)
+![Temperature Forecast Map - Processed Image](examples/temperature_fcast_processed.png)
 
 ### Cloud Cover and Rainfall Forecast Map
 
 Raw layer fetched from DataPoint:
 
-![Cloud Cover and Rainfall Forecast Map - Raw Layer](cloud_precipitation_fcast_basic.png)
+![Cloud Cover and Rainfall Forecast Map - Raw Layer](examples/cloud_precipitation_fcast_basic.png)
 
 **met-office-weather-maps** processed image:
 
-![Cloud Cover and Rainfall Forecast Map - Processed Image](cloud_precipitation_fcast_processed.png)
+![Cloud Cover and Rainfall Forecast Map - Processed Image](examples/cloud_precipitation_fcast_processed.png)
 
 ### More Examples
 
