@@ -137,7 +137,7 @@ abstract class Map
 
         $dateTime = $year . '-' . $month . '-' . $day . ' ' . $hour . ':' . $minute . ':00';
 
-        return date_create($dateTime, timezone_open('UTC'));
+        return new DateTime($dateTime, timezone_open('UTC'));
     }
 
     private function combineMaps($topMapFile, $bottomMapFile, $outputMapFile)
@@ -154,7 +154,8 @@ abstract class Map
 
     private function timestampMap($mapFile, $mapDateTime)
     {
-        $timestamp = date_format($mapDateTime, 'Y-m-d D H:i T');
+        $mapDateTime->setTimezone(new DateTimeZone('Europe/London'));
+        $timestamp = $mapDateTime->format('Y-m-d D H:i T');
 
         $map = imagecreatefrompng($mapFile);
 
