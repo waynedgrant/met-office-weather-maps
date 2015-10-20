@@ -34,6 +34,8 @@ class SurfacePressureExtendedForecastMap extends Map
             $timesteps[] = $surfacePressureChart->ForecastPeriod;
         }
 
+        sort($timesteps, SORT_NUMERIC);
+
         return $timesteps;
     }
 

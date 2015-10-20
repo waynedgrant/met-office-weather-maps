@@ -31,7 +31,11 @@ abstract class ForecastMap extends LayerMap
     {
         $layer = $this->findLayer($mapCapabilities, $this->getLayerName());
 
-        return $layer->Service->Timesteps->Timestep;
+        $timesteps = $layer->Service->Timesteps->Timestep;
+
+        sort($timesteps, SORT_NUMERIC);
+
+        return $timesteps;
     }
 
     abstract protected function getLayerName();

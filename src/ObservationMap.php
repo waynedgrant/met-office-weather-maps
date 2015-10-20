@@ -30,7 +30,11 @@ abstract class ObservationMap extends LayerMap
     {
         $layer = $this->findLayer($mapCapabilities, $this->getLayerName());
 
-        return $layer->Service->Times->Time;
+        $timesteps = $layer->Service->Times->Time;
+
+        rsort($timesteps, SORT_STRING);
+
+        return $timesteps;
     }
 
     protected function getMapImageUrl($timestep, $timestamp)
