@@ -154,7 +154,7 @@ abstract class Map
 
     private function timestampMap($mapFile, $mapDateTime)
     {
-        $timestamp = date_format($mapDateTime, 'Y-m-d H:i') . ' UTC';
+        $timestamp = date_format($mapDateTime, 'Y-m-d D H:i T');
 
         $map = imagecreatefrompng($mapFile);
 
