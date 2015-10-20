@@ -19,7 +19,7 @@ These maps make a great addition to any UK-centric weather website. However, the
 **met-office-weather-maps** solves each of these issues:
 
 1. Map images available only as simple layers are processed by **met-office-weather-maps** which adds appropriate UK base and/or overlay images for the required boundary box.
-2. Where map images are not timestamped **met-office-weather-maps** automatically adds the UK date/time to the top-left corner.
+2. Where map images are not timestamped **met-office-weather-maps** automatically adds the relevant UK date/time to the top-left corner.
 3. **met-office-weather-maps** queries DataPoint's capabilities API and caches the timestamps of all web service calls so that it only fetches map images when new versions are available. This greatly reduces the number of DataPoint web service calls even if **met-office-weather-maps** is called on a frequent schedule.
 
 ## Examples
