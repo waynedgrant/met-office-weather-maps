@@ -78,9 +78,9 @@ For more examples of **met-office-weather-maps** in action see [http://www.wayne
 These instructions can be used to set up **met-office-weather-maps** on a regular schedule on a generic LAMP stack web server.
 
 * Download the source code for the [latest release](https://github.com/waynedgrant/met-office-weather-maps/releases) and unzip it
-* Write a harness in PHP to fetch the maps you require (see **API** and **Example Harness** below and pay heed to the advice in **Fair Use Notes**)
-* Upload all files in **met-office-weather-maps/src** and your **harness** to a directory on your web server
-* Set up a cron schedule to kick off your **harness** regularly (e.g every 15 minutes)
+* Write code in PHP to fetch the maps you require (see **API** and **Example Code** below and pay heed to the advice in **Fair Use Notes**)
+* Upload all files in **met-office-weather-maps/src** and your code to a directory on your web server
+* Set up a cron schedule to kick off your code regularly (e.g every 15 minutes)
 
 ## API
 
@@ -109,9 +109,9 @@ After construction of any of the classes simply call the **fetch()** method on i
 * __timestamp.txt__ - cached timestamp file
 * __0.png ... n.png__ or __0.gif ... n.gif__ - time series images for map in time order
 
-## Example Harness
+## Example Code
 
-This example harness code will fetch a selection of maps into separate folders under **fetched** (replace with your own DataPoint API Key).
+This example code will fetch a selection of maps into separate folders under **fetched** (replace with your own DataPoint API Key).
 
 ```php
 <?php
@@ -146,7 +146,7 @@ foreach ($maps as $map) {
 
 At the time of writing the [DataPoint Terms and Conditions](http://www.metoffice.gov.uk/datapoint/terms-conditions) state fair use for a single API Key is up to 5,000 web service calls a day and up to 100 calls in a single minute.
 
-Calling a harness that requests all map types every 15 minutes will result in less than 4,000 daily calls (a smaller number than it would be otherwise because of **met-office-weather-map's** caching). However, it is possible that the same code could make more than 100 calls in a minute at times when new versions of all maps become available simultaneously and if your web server is especially fast.
+Calling code that requests all map types every 15 minutes will result in less than 4,000 daily calls (a smaller number than it would be otherwise because of **met-office-weather-map's** caching). However, it is possible that the same code could make more than 100 calls in a minute at times when new versions of all maps become available simultaneously and if your web server is especially fast.
 
 Given this I would advise **met-office-weather-map's** users not to request all maps as above but instead only what they need. This will prevent their DataPoint account from being banned. This should not pose an issue for most use cases given the similarity of some of the maps (e.g. CloudCoverAndRainfallForecastMap vs CloudCoverForecastMap & RainfallForecastMap, SurfacePressureExtendedForecastMap vs SurfacePressureForecastMap).
 
