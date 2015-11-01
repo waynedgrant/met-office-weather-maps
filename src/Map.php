@@ -7,14 +7,14 @@ abstract class Map
 {
     protected $apiKey;
     private $workingFolder;
-    private $timestampFile;
+    private $infoJsonFile;
     private $imagesDir;
 
     protected function __construct($apiKey, $workingFolder)
     {
         $this->apiKey = $apiKey;
         $this->workingFolder = $workingFolder;
-        $this->timestampFile = $workingFolder . '/timestamp.txt';
+        $this->infoJsonFile = $workingFolder . '/info.json';
         $this->imagesDir = dirname(__FILE__ ) . '/images/';
     }
 
@@ -22,38 +22,40 @@ abstract class Map
     {
         $mapCapabilities = json_decode(file_get_contents($this->getCapabilitiesUrl()));
 
-        $lastestTimestamp = $this->getLastestTimestamp($mapCapabilities);
+        $lastestTimestamp = $this->readLastestTimestamp($mapCapabilities);
         $currentTimestamp = $this->getCurrentTimestamp();
-        $this->updateCurrentTimestamp($lastestTimestamp);
 
         if ($lastestTimestamp != $currentTimestamp)
         {
-            $timesteps = $this->getAvailableTimesteps($mapCapabilities);
+            $baseDateTime = $this->createDateTime($lastestTimestamp);
+            $mapsInfo = array();
+            $timesteps = $this->readAvailableTimesteps($mapCapabilities);
 
-            $index = 0;
-
-            foreach ($timesteps as $timestep)
+            for ($i = 0; $i < count($timesteps); $i++)
             {
-                $mapImageUrl = $this->getMapImageUrl($timestep, $lastestTimestamp);
+                $timestep = $timesteps[$i];
 
-                $downloadedMap = $this->workingFolder . '/' . $index . '.' . $this->getImageFormat();
+                $mapImageUrl = $this->generateMapImageUrl($timestep, $lastestTimestamp);
 
-                copy($mapImageUrl, $downloadedMap);
+                $mapFile = $this->workingFolder . '/' . $i . '.' . $this->getImageFormat();
 
-                $this->processMap($downloadedMap, $lastestTimestamp, $timestep);
+                copy($mapImageUrl, $mapFile);
 
-                $index++;
+                $mapsInfo[] = $this->processMap($mapFile, $baseDateTime, $timestep);
             }
+
+            $this->writeInfoJson($lastestTimestamp, $baseDateTime, $mapsInfo);
         }
     }
 
+    abstract protected function getName();
     abstract protected function getCapabilitiesUrl();
-    abstract protected function getLastestTimestamp($mapCapabilities);
-    abstract protected function getAvailableTimesteps($mapCapabilities);
+    abstract protected function readLastestTimestamp($mapCapabilities);
+    abstract protected function readAvailableTimesteps($mapCapabilities);
     abstract protected function getImageFormat();
     abstract protected function getWidth();
     abstract protected function getHeight();
-    abstract protected function getMapImageUrl($timestep, $timestamp);
+    abstract protected function generateMapImageUrl($timestep, $timestamp);
     abstract protected function getBaseMap();
     abstract protected function getOverlayMap();
     abstract protected function requiresTimestamp();
@@ -65,21 +67,27 @@ abstract class Map
             mkdir($this->workingFolder, 0777, true);
         }
 
-        if (is_file($this->timestampFile))
+        if (is_file($this->infoJsonFile))
         {
-            $currentTimestamp = file_get_contents($this->timestampFile);
+            $info = json_decode(file_get_contents($this->infoJsonFile));
+            $currentTimestamp = $info->datapoint_timestamp;
         }
 
         return $currentTimestamp;
     }
 
-    private function updateCurrentTimestamp($lastUpdateTimestamp)
+    private function processMap($mapFile, $baseDateTime, $timestep)
     {
-        file_put_contents($this->timestampFile, $lastUpdateTimestamp);
-    }
+        $mapDateTime = $this->calculateMapDateTime($baseDateTime, $timestep);
+        $mapRelativeMinutes = $this->calculateMapRelativeMinutes($baseDateTime, $timestep);
 
-    private function processMap($mapFile, $timestamp, $timestep)
-    {
+        $mapInfo = array(
+            'image' => basename($mapFile),
+            'width' => $this->getWidth(),
+            'height' => $this->getHeight(),
+            'date_time' => $mapDateTime->format('Y-m-d H:i T'),
+            'relative_minutes' => $mapRelativeMinutes);
+
         $baseMap = $this->getBaseMap();
 
         if (!is_null($baseMap))
@@ -98,9 +106,10 @@ abstract class Map
 
         if ($this->requiresTimestamp())
         {
-            $mapDateTime = $this->calculateMapDateTime($timestamp, $timestep);
             $this->timestampMap($mapFile, $mapDateTime);
         }
+
+        return $mapInfo;
     }
 
     private function addBaseMap($mapFile, $baseMapFile)
@@ -113,17 +122,30 @@ abstract class Map
         $this->combineMaps($overlayMapFile, $mapFile, $mapFile);
     }
 
-    private function calculateMapDateTime($timestamp, $timestep)
+    private function calculateMapDateTime($baseDateTime, $timestep)
     {
         if (is_numeric($timestep)) // Timestep is hours relative of timestamp date/time
         {
-            $dateTime = $this->createDateTime($timestamp);
+            $dateTime = clone $baseDateTime;
             date_add($dateTime, date_interval_create_from_date_string($timestep . ' hours'));
             return $dateTime;
         }
-        else // Timestep is already a date/time
+        else // Timestep is already a date/time of format yyyy-mm-ddThh:dd:ssZ
         {
             return $this->createDateTime($timestep);
+        }
+    }
+
+    private function calculateMapRelativeMinutes($mapDateTime, $timestep)
+    {
+        if (is_numeric($timestep)) // Timestep is hours relative of timestamp date/time
+        {
+            return $timestep * 60;
+        }
+        else // Timestep is already a date/time of format yyyy-mm-ddThh:dd:ssZ
+        {
+            $interval = $this->createDateTime($timestep)->getTimeStamp() - $mapDateTime->getTimestamp();
+            return $interval / 60;
         }
     }
 
@@ -169,6 +191,21 @@ abstract class Map
         imagepng($map, $mapFile);
 
         imagedestroy($map);
+    }
+
+    private function writeInfoJson($lastestTimestamp, $baseDateTime, $mapsInfo)
+    {
+        $infoJson =
+            json_encode(array(
+                'created_by' => array(
+                    'api' => 'met-office-weather-maps (https://github.com/waynedgrant/met-office-weather-maps)',
+                    'version' => '1.1'),
+                'name' => $this->getName(),
+                'datapoint_timestamp' => $lastestTimestamp,
+                'base_date_time' => $baseDateTime->format('Y-m-d H:i T'),
+                'maps' => $mapsInfo));
+
+        file_put_contents($this->infoJsonFile, $infoJson);
     }
 }
 

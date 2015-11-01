@@ -12,6 +12,11 @@ class SurfacePressureExtendedForecastMap extends Map
         parent::__construct($apiKey, $workingFolder);
     }
 
+    protected function getName()
+    {
+        return 'Surface Pressure Extended Forecast Map';
+    }
+
     protected function getCapabilitiesUrl()
     {
         return MessageFormatter::formatMessage('en_GB',
@@ -19,12 +24,12 @@ class SurfacePressureExtendedForecastMap extends Map
             array($this->apiKey));
     }
 
-    protected function getLastestTimestamp($mapCapabilities)
+    protected function readLastestTimestamp($mapCapabilities)
     {
         return $mapCapabilities->BWSurfacePressureChartList->BWSurfacePressureChart[0]->DataDate;
     }
 
-    protected function getAvailableTimesteps($mapCapabilities)
+    protected function readAvailableTimesteps($mapCapabilities)
     {
         $surfacePressureCharts = $mapCapabilities->BWSurfacePressureChartList->BWSurfacePressureChart;
 
@@ -39,7 +44,7 @@ class SurfacePressureExtendedForecastMap extends Map
         return $timesteps;
     }
 
-    protected function getMapImageUrl($timestep, $timestamp)
+    protected function generateMapImageUrl($timestep, $timestamp)
     {
         return MessageFormatter::formatMessage('en_GB',
             'http://datapoint.metoffice.gov.uk/public/data/image/wxfcs/surfacepressure/{0}?timestep={1}&key={2}',

@@ -12,6 +12,11 @@ class RainfallForecastMap extends ForecastMap
         parent::__construct($apiKey, $workingFolder);
     }
 
+    protected function getName()
+    {
+        return 'Rainfall Forecast Map';
+    }
+
     protected function getLayerName()
     {
         return 'Precipitation_Rate';

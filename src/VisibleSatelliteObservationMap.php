@@ -12,6 +12,11 @@ class VisibleSatelliteObservationMap extends ObservationMap
         parent::__construct($apiKey, $workingFolder);
     }
 
+    protected function getName()
+    {
+        return 'Visible Satellite Observation Map';
+    }
+
     protected function getLayerName()
     {
         return 'SATELLITE_Visible_N_Section';

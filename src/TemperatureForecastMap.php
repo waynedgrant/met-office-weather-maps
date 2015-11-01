@@ -12,6 +12,11 @@ class TemperatureForecastMap extends ForecastMap
         parent::__construct($apiKey, $workingFolder);
     }
 
+    protected function getName()
+    {
+        return 'Temperature Forecast Map';
+    }
+
     protected function getLayerName()
     {
         return 'Temperature';

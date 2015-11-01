@@ -12,6 +12,11 @@ class CloudCoverForecastMap extends ForecastMap
         parent::__construct($apiKey, $workingFolder);
     }
 
+    protected function getName()
+    {
+        return 'Cloud Cover Forecast Map';
+    }
+
     protected function getLayerName()
     {
         return 'Total_Cloud_Cover';

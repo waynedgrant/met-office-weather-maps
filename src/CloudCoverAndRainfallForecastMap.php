@@ -12,6 +12,11 @@ class CloudCoverAndRainfallForecastMap extends ForecastMap
         parent::__construct($apiKey, $workingFolder);
     }
 
+    protected function getName()
+    {
+        return 'Cloud Cover and Rainfall Forecast Map';
+    }
+
     protected function getLayerName()
     {
         return 'Total_Cloud_Cover_Precip_Rate_Overlaid';
