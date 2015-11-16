@@ -109,7 +109,49 @@ After construction of any of the classes simply call the **fetch()** method on i
 * __0.png ... n.png__ or __0.gif ... n.gif__ - time series images for map in time order
 * __info.json__ - JSON formatted description of fetched map (see below)
 
-TODO - info.json
+### info.json
+
+The info.json for a map can be used to dynamically build HTML web page to host it using, for example, JQuery. The info.json file contains the following fields:
+
+| Field                | Description                                                                                                                      |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| name                 | Map name                                                                                                                         |
+| datapoint_timestamp  | Map creation timestamp originally returned by Datapoint                                                                          |
+| base_time            | Map base time: YYYY-MM-DD hh:mm UTC                                                                                              |
+| images               | Array of time series image details in time order                                                                                 |
+| images.file          | Image file name                                                                                                                  |
+| images.width         | Image width in pixels                                                                                                            |
+| images.height        | Image height in pixels                                                                                                           |
+| images.time          | Image time: YYYY-MM-DD hh:mm UTC                                                                                                 |
+| images.timestep_mins | Image timestep relative to base_time in minutes (0 or positive value for forecast maps, 0 or negative value for observation maps |
+
+For example, this example snippet of an info.json file:
+
+```json
+{
+    "name": "Rainfall Observation Map",
+    "datapoint_timestamp" : "2015-11-14T08:30:00",
+    "base_time": "2015-11-14 08:30 UTC",
+    "images":
+    [
+        {
+            "file": "0.png",
+            "width": 500,
+            "height": 500,
+            "time": "2015-11-14 08:30 UTC",
+            "timestep_mins": 0
+        },
+        {
+            "file": "1.png",
+            "width": 500,
+            "height": 500,
+            "time": "2015-11-14 08:15 UTC",
+            "timestep_mins": -15
+        },
+        ... etc ...
+    ]
+}
+```
 
 ## Example Code
 
