@@ -118,7 +118,7 @@ The __info.json__ for a map can be used to dynamically build an HTML web page to
 | name                 | Map name                                                                                                                         |
 | datapoint_timestamp  | Map creation timestamp originally returned by Datapoint                                                                          |
 | base_time            | Map base time: YYYY-MM-DD hh:mm UTC                                                                                              |
-| images               | Array of time series image details in time order                                                                                 |
+| images               | Array of time series image details. In increasing time order for forecast maps and decreasing time order for observation maps |
 | images.file          | Image file name                                                                                                                  |
 | images.width         | Image width in pixels                                                                                                            |
 | images.height        | Image height in pixels                                                                                                           |
