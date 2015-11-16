@@ -111,7 +111,7 @@ After construction of any of the classes simply call the **fetch()** method on i
 
 ### info.json
 
-The info.json for a map can be used to dynamically build HTML web page to host it using, for example, JQuery. The info.json file contains the following fields:
+The __info.json__ for a map can be used to dynamically build an HTML web page to host it using, for example, JQuery. The __info.json__ file contains the following fields:
 
 | Field                | Description                                                                                                                      |
 |----------------------|----------------------------------------------------------------------------------------------------------------------------------|
