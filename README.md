@@ -107,7 +107,7 @@ All class constructors take the same two mandatory parameters:
 After construction of any of the classes simply call the **fetch()** method on it to fetch all images for the given map. After a successful fetch the **workingFolder** (which will be created automatically if necessary) will contain the following files:
 
 * __0.png ... n.png__ or __0.gif ... n.gif__ - time series images for map in time order
-* __info.json__ - JSON formatted description of fetched map (see below)
+* __info.json__ - JSON formatted description of the fetched map (see below)
 
 ### info.json
 
@@ -125,9 +125,9 @@ The __info.json__ for a map can be used to dynamically build an HTML web page to
 | images.time          | Image time: YYYY-MM-DD hh:mm UTC                                                                                                 |
 | images.timestep_mins | Image timestep relative to base_time in minutes (0 or positive value for forecast maps, 0 or negative value for observation maps |
 
-For example, this example snippet of an info.json file:
+For example, this example snippet of an __info.json__ file:
 
-```json
+```
 {
     "name": "Rainfall Observation Map",
     "datapoint_timestamp" : "2015-11-14T08:30:00",
