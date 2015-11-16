@@ -125,7 +125,7 @@ The __info.json__ for a map can be used to dynamically build an HTML web page to
 | images.time          | Image time: YYYY-MM-DD hh:mm UTC                                                                                                 |
 | images.timestep_mins | Image timestep relative to base_time in minutes (0 or positive value for forecast maps, 0 or negative value for observation maps |
 
-For example, this example snippet of an __info.json__ file:
+For example, this snippet of a __info.json__ file:
 
 ```
 {
