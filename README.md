@@ -114,16 +114,16 @@ After construction of any of the classes simply call the **fetch()** method on i
 The __info.json__ for a map can be used to dynamically build an HTML web page to host it using, for example, JQuery. The __info.json__ file contains the following fields:
 
 | Field                | Description                                                                                                                      |
-|----------------------|----------------------------------------------------------------------------------------------------------------------------------|
-| name                 | Map name                                                                                                                         |
-| datapoint_timestamp  | Map creation timestamp originally returned by Datapoint                                                                          |
-| base_time            | Map base time: YYYY-MM-DD hh:mm UTC                                                                                              |
-| images               | Array of time series image details. In increasing time order for forecast maps and decreasing time order for observation maps |
-| images.file          | Image file name                                                                                                                  |
-| images.width         | Image width in pixels                                                                                                            |
-| images.height        | Image height in pixels                                                                                                           |
-| images.time          | Image time: YYYY-MM-DD hh:mm UTC                                                                                                 |
-| images.timestep_mins | Image timestep relative to base_time in minutes (0 or positive value for forecast maps, 0 or negative value for observation maps |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| name                 | Map name                                                                                                                          |
+| datapoint_timestamp  | Map creation timestamp originally returned by Datapoint                                                                           |
+| base_time            | Map base time: YYYY-MM-DD hh:mm UTC                                                                                               |
+| images               | Array of time series image details (in increasing time order for forecast maps and decreasing time order for observation maps) |
+| images.file          | Image file name                                                                                                                   |
+| images.width         | Image width in pixels                                                                                                             |
+| images.height        | Image height in pixels                                                                                                            |
+| images.time          | Image time: YYYY-MM-DD hh:mm UTC                                                                                                  |
+| images.timestep_mins | Image timestep relative to base_time in minutes (0 or positive value for forecast maps, 0 or negative value for observation maps) |
 
 For example, this snippet of a __info.json__ file:
 
