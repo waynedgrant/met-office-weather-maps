@@ -203,7 +203,7 @@ Given this I would advise **met-office-weather-map's** users not to request all 
 | CloudCoverAndRainfallForecastMap   | uk base colour    | uk overlay black full outline    |
 | CloudCoverForecastMap              | uk base colour    | uk overlay black full outline    |
 | InfraredSatelliteObservationMap    | N/A               | uk overlay yellow cutout outline |
-| LightningObservationMap            | uk base colour    | N/A                              |
+| LightningObservationMap            | uk base greyscale | N/A                              |
 | RainfallForecastMap                | uk base colour    | uk overlay black full outline    |
 | RainfallObservationMap             | uk base colour    | uk overlay black full outline    |
 | SurfacePressureExtendedForecastMap | N/A               | N/A                              |

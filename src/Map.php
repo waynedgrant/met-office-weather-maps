@@ -200,7 +200,7 @@ abstract class Map
                 'name' => $this->getName(),
                 'created_by' => array(
                     'api' => 'met-office-weather-maps (https://github.com/waynedgrant/met-office-weather-maps)',
-                    'version' => '1.1'),
+                    'version' => '1.2'),
                 'datapoint_timestamp' => $lastestTimestamp,
                 'base_time' => $baseDateTime->format('Y-m-d H:i T'),
                 'images' => $imagesInfo));
