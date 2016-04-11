@@ -19,14 +19,14 @@ abstract class ObservationMap extends LayerMap
             array($this->apiKey));
     }
 
-    protected function getLastestTimestamp($mapCapabilities)
+    protected function readLastestTimestamp($mapCapabilities)
     {
         $layer = $this->findLayer($mapCapabilities, $this->getLayerName());
 
         return $layer->Service->Times->Time[0];
     }
 
-    protected function getAvailableTimesteps($mapCapabilities)
+    protected function readAvailableTimesteps($mapCapabilities)
     {
         $layer = $this->findLayer($mapCapabilities, $this->getLayerName());
 
@@ -37,7 +37,7 @@ abstract class ObservationMap extends LayerMap
         return $timesteps;
     }
 
-    protected function getMapImageUrl($timestep, $timestamp)
+    protected function generateMapImageUrl($timestep, $timestamp)
     {
         return MessageFormatter::formatMessage('en_GB',
             'http://datapoint.metoffice.gov.uk/public/data/layer/wxobs/{0}/png?TIME={1}Z&key={2}',

@@ -12,6 +12,11 @@ class RainfallObservationMap extends ObservationMap
         parent::__construct($apiKey, $workingFolder);
     }
 
+    protected function getName()
+    {
+        return 'Rainfall Observation Map';
+    }
+
     protected function getLayerName()
     {
         return 'RADAR_UK_Composite_Highres';

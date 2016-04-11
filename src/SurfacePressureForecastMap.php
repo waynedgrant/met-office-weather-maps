@@ -12,6 +12,11 @@ class SurfacePressureForecastMap extends ForecastMap
         parent::__construct($apiKey, $workingFolder);
     }
 
+    protected function getName()
+    {
+        return 'Surface Pressure Forecast Map';
+    }
+
     protected function getLayerName()
     {
         return 'Atlantic';

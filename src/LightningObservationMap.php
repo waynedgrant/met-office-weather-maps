@@ -12,6 +12,11 @@ class LightningObservationMap extends ObservationMap
         parent::__construct($apiKey, $workingFolder);
     }
 
+    protected function getName()
+    {
+        return 'Lightning Observation Map';
+    }
+
     protected function getLayerName()
     {
         return 'ATDNET_Sferics';
@@ -24,7 +29,7 @@ class LightningObservationMap extends ObservationMap
 
     protected function getBaseMap()
     {
-        return 'uk_base_colour.png';
+        return 'uk_base_greyscale.png';
     }
 
     protected function getOverlayMap()

@@ -19,7 +19,7 @@ abstract class ForecastMap extends LayerMap
             array($this->apiKey));
     }
 
-    protected function getLastestTimestamp($mapCapabilities)
+    protected function readLastestTimestamp($mapCapabilities)
     {
         $layer = $this->findLayer($mapCapabilities, $this->getLayerName());
 
@@ -27,7 +27,7 @@ abstract class ForecastMap extends LayerMap
         return $layer->Service->Timesteps->$defaultTime;
     }
 
-    protected function getAvailableTimesteps($mapCapabilities)
+    protected function readAvailableTimesteps($mapCapabilities)
     {
         $layer = $this->findLayer($mapCapabilities, $this->getLayerName());
 
@@ -45,7 +45,7 @@ abstract class ForecastMap extends LayerMap
         return 'uk_base_colour.png';
     }
 
-    protected function getMapImageUrl($timestep, $timestamp)
+    protected function generateMapImageUrl($timestep, $timestamp)
     {
         return MessageFormatter::formatMessage('en_GB',
             'http://datapoint.metoffice.gov.uk/public/data/layer/wxfcs/{0}/{1}?RUN={2}Z&FORECAST={3}&key={4}',

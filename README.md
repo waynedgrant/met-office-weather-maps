@@ -106,8 +106,52 @@ All class constructors take the same two mandatory parameters:
 
 After construction of any of the classes simply call the **fetch()** method on it to fetch all images for the given map. After a successful fetch the **workingFolder** (which will be created automatically if necessary) will contain the following files:
 
-* __timestamp.txt__ - cached timestamp file
 * __0.png ... n.png__ or __0.gif ... n.gif__ - time series images for map in time order
+* __info.json__ - JSON formatted description of the fetched map (see below)
+
+### info.json
+
+The __info.json__ for a map can be used to dynamically build an HTML web page to host it using, for example, JQuery. The __info.json__ file contains the following fields:
+
+| Field                | Description                                                                                                                      |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| name                 | Map name                                                                                                                          |
+| datapoint_timestamp  | Map creation timestamp originally returned by Datapoint                                                                           |
+| base_time            | Map base time: YYYY-MM-DD hh:mm UTC                                                                                               |
+| images               | Array of time series image details (in increasing time order for forecast maps and decreasing time order for observation maps) |
+| images.file          | Image file name                                                                                                                   |
+| images.width         | Image width in pixels                                                                                                             |
+| images.height        | Image height in pixels                                                                                                            |
+| images.time          | Image time: YYYY-MM-DD hh:mm UTC                                                                                                  |
+| images.timestep_mins | Image timestep relative to base_time in minutes (0 or positive value for forecast maps, 0 or negative value for observation maps) |
+
+For example, this snippet of a __info.json__ file:
+
+```
+{
+    "name": "Rainfall Observation Map",
+    "datapoint_timestamp" : "2015-11-14T08:30:00",
+    "base_time": "2015-11-14 08:30 UTC",
+    "images":
+    [
+        {
+            "file": "0.png",
+            "width": 500,
+            "height": 500,
+            "time": "2015-11-14 08:30 UTC",
+            "timestep_mins": 0
+        },
+        {
+            "file": "1.png",
+            "width": 500,
+            "height": 500,
+            "time": "2015-11-14 08:15 UTC",
+            "timestep_mins": -15
+        },
+        ... etc ...
+    ]
+}
+```
 
 ## Example Code
 
@@ -159,7 +203,7 @@ Given this I would advise **met-office-weather-map's** users not to request all 
 | CloudCoverAndRainfallForecastMap   | uk base colour    | uk overlay black full outline    |
 | CloudCoverForecastMap              | uk base colour    | uk overlay black full outline    |
 | InfraredSatelliteObservationMap    | N/A               | uk overlay yellow cutout outline |
-| LightningObservationMap            | uk base colour    | N/A                              |
+| LightningObservationMap            | uk base greyscale | N/A                              |
 | RainfallForecastMap                | uk base colour    | uk overlay black full outline    |
 | RainfallObservationMap             | uk base colour    | uk overlay black full outline    |
 | SurfacePressureExtendedForecastMap | N/A               | N/A                              |
