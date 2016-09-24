@@ -209,7 +209,7 @@ Given this I would advise **met-office-weather-map's** users not to request all 
 | SurfacePressureExtendedForecastMap | N/A               | N/A                              |
 | SurfacePressureForecastMap         | uk base colour    | N/A                              |
 | TemperatureForecastMap             | uk base colour    | uk overlay black full outline    |
-| VisibleSatelliteObservationMap     | N/A               | uk overlay yellow cutout outline |
+| VisibleSatelliteObservationMap     | blank black       | uk overlay yellow cutout outline |
 
 ### Output Map Image Formats and Sizes
 
