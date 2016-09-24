@@ -22,12 +22,12 @@ abstract class Map
     {
         $mapCapabilities = json_decode(file_get_contents($this->getCapabilitiesUrl()));
 
-        $lastestTimestamp = $this->readLastestTimestamp($mapCapabilities);
+        $latestTimestamp = $this->readLatestTimestamp($mapCapabilities);
         $currentTimestamp = $this->getCurrentTimestamp();
 
-        if ($lastestTimestamp != $currentTimestamp)
+        if ($latestTimestamp != $currentTimestamp)
         {
-            $baseDateTime = $this->createDateTime($lastestTimestamp);
+            $baseDateTime = $this->createDateTime($latestTimestamp);
             $imagesInfo = array();
             $timesteps = $this->readAvailableTimesteps($mapCapabilities);
 
@@ -35,7 +35,7 @@ abstract class Map
             {
                 $timestep = $timesteps[$i];
 
-                $mapImageUrl = $this->generateMapImageUrl($timestep, $lastestTimestamp);
+                $mapImageUrl = $this->generateMapImageUrl($timestep, $latestTimestamp);
 
                 $mapImageFile = $this->workingFolder . '/' . $i . '.' . $this->getImageFormat();
 
@@ -44,13 +44,13 @@ abstract class Map
                 $imagesInfo[] = $this->processMapImage($mapImageFile, $baseDateTime, $timestep);
             }
 
-            $this->writeInfoJson($lastestTimestamp, $baseDateTime, $imagesInfo);
+            $this->writeInfoJson($latestTimestamp, $baseDateTime, $imagesInfo);
         }
     }
 
     abstract protected function getName();
     abstract protected function getCapabilitiesUrl();
-    abstract protected function readLastestTimestamp($mapCapabilities);
+    abstract protected function readLatestTimestamp($mapCapabilities);
     abstract protected function readAvailableTimesteps($mapCapabilities);
     abstract protected function getImageFormat();
     abstract protected function getWidth();
@@ -193,7 +193,7 @@ abstract class Map
         imagedestroy($map);
     }
 
-    private function writeInfoJson($lastestTimestamp, $baseDateTime, $imagesInfo)
+    private function writeInfoJson($latestTimestamp, $baseDateTime, $imagesInfo)
     {
         $infoJson =
             json_encode(array(
@@ -201,7 +201,7 @@ abstract class Map
                 'created_by' => array(
                     'api' => 'met-office-weather-maps (https://github.com/waynedgrant/met-office-weather-maps)',
                     'version' => '1.2'),
-                'datapoint_timestamp' => $lastestTimestamp,
+                'datapoint_timestamp' => $latestTimestamp,
                 'base_time' => $baseDateTime->format('Y-m-d H:i T'),
                 'images' => $imagesInfo));
 

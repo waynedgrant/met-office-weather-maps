@@ -19,7 +19,7 @@ abstract class ObservationMap extends LayerMap
             array($this->apiKey));
     }
 
-    protected function readLastestTimestamp($mapCapabilities)
+    protected function readLatestTimestamp($mapCapabilities)
     {
         $layer = $this->findLayer($mapCapabilities, $this->getLayerName());
 

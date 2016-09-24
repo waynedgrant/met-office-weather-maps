@@ -24,7 +24,7 @@ class SurfacePressureExtendedForecastMap extends Map
             array($this->apiKey));
     }
 
-    protected function readLastestTimestamp($mapCapabilities)
+    protected function readLatestTimestamp($mapCapabilities)
     {
         return $mapCapabilities->BWSurfacePressureChartList->BWSurfacePressureChart[0]->DataDate;
     }
