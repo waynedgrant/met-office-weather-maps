@@ -37,13 +37,16 @@ abstract class Map
 
                 $mapImageUrl = $this->generateMapImageUrl($timestep, $latestTimestamp);
 
-                $mapImageFile = $this->workingFolder . '/' . $i . '.' . $this->getImageFormat();
-                $unprocessedMapImageFile = $this->workingFolder . '/unprocessed-' . $i . '.' . $this->getImageFormat();
+                $rawMapImageFile = $this->workingFolder . '/raw-' . $i . '.' . $this->getImageFormat();
 
-                copy($mapImageUrl, $mapImageFile);
-                copy($mapImageFile, $unprocessedMapImageFile);
+                if (copy($mapImageUrl, $rawMapImageFile)) // if download fails don't process what would be an old raw map
+                {
+                    $mapImageFile = $this->workingFolder . '/' . $i . '.' . $this->getImageFormat();
 
-                $imagesInfo[] = $this->processMapImage($mapImageFile, $baseDateTime, $timestep);
+                    copy($rawMapImageFile, $mapImageFile);
+
+                    $imagesInfo[] = $this->processMapImage($mapImageFile, $baseDateTime, $timestep);
+                }
             }
 
             $this->writeInfoJson($latestTimestamp, $baseDateTime, $imagesInfo);
