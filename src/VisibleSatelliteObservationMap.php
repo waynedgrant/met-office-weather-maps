@@ -29,7 +29,7 @@ class VisibleSatelliteObservationMap extends ObservationMap
 
     protected function getBaseMap()
     {
-        return null;
+        return 'blank_black.png';
     }
 
     protected function getOverlayMap()
