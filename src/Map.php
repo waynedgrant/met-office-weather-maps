@@ -38,8 +38,10 @@ abstract class Map
                 $mapImageUrl = $this->generateMapImageUrl($timestep, $latestTimestamp);
 
                 $mapImageFile = $this->workingFolder . '/' . $i . '.' . $this->getImageFormat();
+                $unprocessedMapImageFile = $this->workingFolder . '/unprocessed-' . $i . '.' . $this->getImageFormat();
 
                 copy($mapImageUrl, $mapImageFile);
+                copy($mapImageFile, $unprocessedMapImageFile);
 
                 $imagesInfo[] = $this->processMapImage($mapImageFile, $baseDateTime, $timestep);
             }
