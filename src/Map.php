@@ -45,7 +45,7 @@ abstract class Map
 
                     copy($rawMapImageFile, $mapImageFile);
 
-                    $imagesInfo[] = $this->processMapImage($mapImageFile, $baseDateTime, $timestep);
+                    $imagesInfo[] = $this->processMapImage($mapImageUrl, $mapImageFile, $baseDateTime, $timestep);
                 }
             }
 
@@ -81,7 +81,7 @@ abstract class Map
         return $currentTimestamp;
     }
 
-    private function processMapImage($mapImageFile, $baseDateTime, $timestep)
+    private function processMapImage($mapImageUrl, $mapImageFile, $baseDateTime, $timestep)
     {
         $mapImageDateTime = $this->calculateMapImageDateTime($baseDateTime, $timestep);
         $timestepMins = $this->calculateTimestepMins($baseDateTime, $timestep);
@@ -91,7 +91,8 @@ abstract class Map
             'width' => $this->getWidth(),
             'height' => $this->getHeight(),
             'time' => $mapImageDateTime->format('Y-m-d H:i T'),
-            'timestep_mins' => $timestepMins);
+            'timestep_mins' => $timestepMins,
+            'datapoint_url' => $mapImageUrl);
 
         $baseMap = $this->getBaseMap();
 
