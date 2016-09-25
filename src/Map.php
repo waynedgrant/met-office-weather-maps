@@ -38,14 +38,23 @@ abstract class Map
                 $mapImageUrl = $this->generateMapImageUrl($timestep, $latestTimestamp);
 
                 $rawMapImageFile = $this->workingFolder . '/raw-' . $i . '.' . $this->getImageFormat();
+                $mapImageFile = $this->workingFolder . '/' . $i . '.' . $this->getImageFormat();
 
-                if (copy($mapImageUrl, $rawMapImageFile)) // if download fails don't process what would be an old raw map
+                if (copy($mapImageUrl, $rawMapImageFile))
                 {
-                    $mapImageFile = $this->workingFolder . '/' . $i . '.' . $this->getImageFormat();
-
                     copy($rawMapImageFile, $mapImageFile);
 
                     $imagesInfo[] = $this->processMapImage($mapImageUrl, $mapImageFile, $baseDateTime, $timestep);
+                }
+                else
+                {
+                    $errorMessage = error_get_last()['message'];
+
+                    $errorDownloadingMapImageFile = $this->imagesDir . $this->getDownloadErrorMap();
+
+                    copy($errorDownloadingMapImageFile, $mapImageFile);
+
+                    $imagesInfo[] = $this->errorDownloadingMapImage($mapImageUrl, $mapImageFile, $baseDateTime, $timestep, $errorMessage);
                 }
             }
 
@@ -63,6 +72,7 @@ abstract class Map
     abstract protected function generateMapImageUrl($timestep, $timestamp);
     abstract protected function getBaseMap();
     abstract protected function getOverlayMap();
+    abstract protected function getDownloadErrorMap();
     abstract protected function requiresTimestamp();
 
     private function getCurrentTimestamp()
@@ -114,6 +124,23 @@ abstract class Map
         {
             $this->timestampMapImage($mapImageFile, $mapImageDateTime);
         }
+
+        return $mapInfo;
+    }
+
+    private function errorDownloadingMapImage($mapImageUrl, $mapImageFile, $baseDateTime, $timestep, $errorMessage)
+    {
+        $mapImageDateTime = $this->calculateMapImageDateTime($baseDateTime, $timestep);
+        $timestepMins = $this->calculateTimestepMins($baseDateTime, $timestep);
+
+        $mapInfo = array(
+            'file' => basename($mapImageFile),
+            'width' => $this->getWidth(),
+            'height' => $this->getHeight(),
+            'time' => $mapImageDateTime->format('Y-m-d H:i T'),
+            'timestep_mins' => $timestepMins,
+            'datapoint_url' => $mapImageUrl,
+            'download_error' => $errorMessage);
 
         return $mapInfo;
     }

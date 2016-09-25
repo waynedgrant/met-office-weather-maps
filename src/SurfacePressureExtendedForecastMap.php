@@ -80,6 +80,11 @@ class SurfacePressureExtendedForecastMap extends Map
     {
         return null;
     }
+
+    protected function getDownloadErrorMap()
+    {
+        return 'error_downloading_map_891x601.png';
+    }
 }
 
 ?>

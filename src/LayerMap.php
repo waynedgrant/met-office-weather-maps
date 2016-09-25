@@ -39,6 +39,11 @@ abstract class LayerMap extends Map
     {
         return 500;
     }
+
+    protected function getDownloadErrorMap()
+    {
+        return 'error_downloading_map_500x500.png';
+    }
 }
 
 ?>
