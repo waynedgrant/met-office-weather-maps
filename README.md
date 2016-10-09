@@ -66,7 +66,7 @@ Raw layer fetched from DataPoint:
 
 ### More Examples
 
-For more examples of **met-office-weather-maps** in action see [http://www.waynedgrant.com/weather/maps.html](http://www.waynedgrant.com/weather/maps.html).
+For more examples of **met-office-weather-maps** in action see [http://waynedgrant.com/weather/maps.html](http://waynedgrant.com/weather/maps.html).
 
 ## Requirements
 
