@@ -77,6 +77,8 @@ abstract class Map
 
     private function getCurrentTimestamp()
     {
+        $currentTimestamp = null;
+
         if (!is_dir($this->workingFolder))
         {
             mkdir($this->workingFolder, 0777, true);
