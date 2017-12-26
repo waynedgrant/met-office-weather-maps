@@ -5,35 +5,29 @@
 
 require_once('ObservationMap.php');
 
-class RainfallObservationMap extends ObservationMap
-{
-    public function __construct($apiKey, $workingFolder)
-    {
+class RainfallObservationMap extends ObservationMap {
+
+    public function __construct($apiKey, $workingFolder) {
         parent::__construct($apiKey, $workingFolder);
     }
 
-    protected function getName()
-    {
+    protected function getName() {
         return 'Rainfall Observation Map';
     }
 
-    protected function getLayerName()
-    {
+    protected function getLayerName() {
         return 'RADAR_UK_Composite_Highres';
     }
 
-    protected function requiresTimestamp()
-    {
+    protected function requiresTimestamp() {
         return true;
     }
 
-    protected function getBaseMap()
-    {
+    protected function getBaseMap() {
         return 'uk_base_colour.png';
     }
 
-    protected function getOverlayMap()
-    {
+    protected function getOverlayMap() {
         return 'uk_overlay_black_full_outline.png';
     }
 }

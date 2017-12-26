@@ -5,30 +5,25 @@
 
 require_once('ForecastMap.php');
 
-class RainfallForecastMap extends ForecastMap
-{
-    public function __construct($apiKey, $workingFolder)
-    {
+class RainfallForecastMap extends ForecastMap {
+
+    public function __construct($apiKey, $workingFolder) {
         parent::__construct($apiKey, $workingFolder);
     }
 
-    protected function getName()
-    {
+    protected function getName() {
         return 'Rainfall Forecast Map';
     }
 
-    protected function getLayerName()
-    {
+    protected function getLayerName() {
         return 'Precipitation_Rate';
     }
 
-    protected function requiresTimestamp()
-    {
+    protected function requiresTimestamp() {
         return true;
     }
 
-    protected function getOverlayMap()
-    {
+    protected function getOverlayMap() {
         return 'uk_overlay_black_full_outline.png';
     }
 }

@@ -5,35 +5,29 @@
 
 require_once('ObservationMap.php');
 
-class VisibleSatelliteObservationMap extends ObservationMap
-{
-    public function __construct($apiKey, $workingFolder)
-    {
+class VisibleSatelliteObservationMap extends ObservationMap {
+
+    public function __construct($apiKey, $workingFolder) {
         parent::__construct($apiKey, $workingFolder);
     }
 
-    protected function getName()
-    {
+    protected function getName() {
         return 'Visible Satellite Observation Map';
     }
 
-    protected function getLayerName()
-    {
+    protected function getLayerName() {
         return 'SATELLITE_Visible_N_Section';
     }
 
-    protected function requiresTimestamp()
-    {
+    protected function requiresTimestamp() {
         return false;
     }
 
-    protected function getBaseMap()
-    {
+    protected function getBaseMap() {
         return 'blank_black.png';
     }
 
-    protected function getOverlayMap()
-    {
+    protected function getOverlayMap() {
         return 'uk_overlay_yellow_cutout_outline.png';
     }
 }

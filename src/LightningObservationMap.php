@@ -5,35 +5,29 @@
 
 require_once('ObservationMap.php');
 
-class LightningObservationMap extends ObservationMap
-{
-    public function __construct($apiKey, $workingFolder)
-    {
+class LightningObservationMap extends ObservationMap {
+
+    public function __construct($apiKey, $workingFolder) {
         parent::__construct($apiKey, $workingFolder);
     }
 
-    protected function getName()
-    {
+    protected function getName() {
         return 'Lightning Observation Map';
     }
 
-    protected function getLayerName()
-    {
+    protected function getLayerName() {
         return 'ATDNET_Sferics';
     }
 
-    protected function requiresTimestamp()
-    {
+    protected function requiresTimestamp() {
         return true;
     }
 
-    protected function getBaseMap()
-    {
+    protected function getBaseMap() {
         return 'uk_base_greyscale.png';
     }
 
-    protected function getOverlayMap()
-    {
+    protected function getOverlayMap() {
         return null;
     }
 }

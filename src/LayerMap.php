@@ -5,43 +5,35 @@
 
 require_once('Map.php');
 
-abstract class LayerMap extends Map
-{
-    protected function __construct($apiKey, $workingFolder)
-    {
+abstract class LayerMap extends Map {
+
+    protected function __construct($apiKey, $workingFolder) {
         parent::__construct($apiKey, $workingFolder);
     }
 
-    protected function findLayer($mapCapabilities, $layerName)
-    {
+    protected function findLayer($mapCapabilities, $layerName) {
         $layers = $mapCapabilities->Layers->Layer;
 
-        foreach($layers as $layer)
-        {
-            if ($layer->Service->LayerName == $layerName)
-            {
+        foreach($layers as $layer) {
+            if ($layer->Service->LayerName == $layerName) {
                 return $layer;
             }
         }
     }
 
-    protected function getImageFormat()
-    {
+    protected function getImageFormat() {
         return 'png';
     }
 
-    protected function getWidth()
-    {
+    protected function getWidth() {
         return 500;
     }
 
-    protected function getHeight()
-    {
+    protected function getHeight() {
         return 500;
     }
 
-    protected function getDownloadErrorMap()
-    {
+    protected function getDownloadErrorMap() {
         return 'error_downloading_map_500x500.png';
     }
 }

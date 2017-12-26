@@ -5,35 +5,29 @@
 
 require_once('ObservationMap.php');
 
-class InfraredSatelliteObservationMap extends ObservationMap
-{
-    public function __construct($apiKey, $workingFolder)
-    {
+class InfraredSatelliteObservationMap extends ObservationMap {
+
+    public function __construct($apiKey, $workingFolder) {
         parent::__construct($apiKey, $workingFolder);
     }
 
-    protected function getName()
-    {
+    protected function getName() {
         return 'Infrared Satellite Observation Map';
     }
 
-    protected function getLayerName()
-    {
+    protected function getLayerName() {
         return 'SATELLITE_Infrared_Fulldisk';
     }
 
-    protected function requiresTimestamp()
-    {
+    protected function requiresTimestamp() {
         return false;
     }
 
-    protected function getBaseMap()
-    {
+    protected function getBaseMap() {
         return null;
     }
 
-    protected function getOverlayMap()
-    {
+    protected function getOverlayMap() {
         return 'uk_overlay_yellow_cutout_outline.png';
     }
 }

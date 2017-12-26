@@ -5,29 +5,25 @@
 
 require_once('LayerMap.php');
 
-abstract class ObservationMap extends LayerMap
-{
-    protected function __construct($apiKey, $workingFolder)
-    {
+abstract class ObservationMap extends LayerMap {
+
+    protected function __construct($apiKey, $workingFolder) {
         parent::__construct($apiKey, $workingFolder);
     }
 
-    protected function getCapabilitiesUrl()
-    {
+    protected function getCapabilitiesUrl() {
         return MessageFormatter::formatMessage('en_GB',
             'http://datapoint.metoffice.gov.uk/public/data/layer/wxobs/all/json/capabilities?key={0}',
             array($this->apiKey));
     }
 
-    protected function readLatestTimestamp($mapCapabilities)
-    {
+    protected function readLatestTimestamp($mapCapabilities) {
         $layer = $this->findLayer($mapCapabilities, $this->getLayerName());
 
         return $layer->Service->Times->Time[0];
     }
 
-    protected function readAvailableTimesteps($mapCapabilities)
-    {
+    protected function readAvailableTimesteps($mapCapabilities) {
         $layer = $this->findLayer($mapCapabilities, $this->getLayerName());
 
         $timesteps = $layer->Service->Times->Time;
@@ -37,8 +33,7 @@ abstract class ObservationMap extends LayerMap
         return $timesteps;
     }
 
-    protected function generateMapImageUrl($timestep, $timestamp)
-    {
+    protected function generateMapImageUrl($timestep, $timestamp) {
         return MessageFormatter::formatMessage('en_GB',
             'http://datapoint.metoffice.gov.uk/public/data/layer/wxobs/{0}/png?TIME={1}Z&key={2}',
             array($this->getLayerName(), $timestep, $this->apiKey));

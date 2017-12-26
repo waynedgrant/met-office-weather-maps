@@ -5,30 +5,25 @@
 
 require_once('ForecastMap.php');
 
-class CloudCoverForecastMap extends ForecastMap
-{
-    public function __construct($apiKey, $workingFolder)
-    {
+class CloudCoverForecastMap extends ForecastMap {
+
+    public function __construct($apiKey, $workingFolder) {
         parent::__construct($apiKey, $workingFolder);
     }
 
-    protected function getName()
-    {
+    protected function getName() {
         return 'Cloud Cover Forecast Map';
     }
 
-    protected function getLayerName()
-    {
+    protected function getLayerName() {
         return 'Total_Cloud_Cover';
     }
 
-    protected function requiresTimestamp()
-    {
+    protected function requiresTimestamp() {
         return true;
     }
 
-    protected function getOverlayMap()
-    {
+    protected function getOverlayMap() {
         return 'uk_overlay_black_full_outline.png';
     }
 }

@@ -5,30 +5,25 @@
 
 require_once('ForecastMap.php');
 
-class SurfacePressureForecastMap extends ForecastMap
-{
-    public function __construct($apiKey, $workingFolder)
-    {
+class SurfacePressureForecastMap extends ForecastMap {
+
+    public function __construct($apiKey, $workingFolder) {
         parent::__construct($apiKey, $workingFolder);
     }
 
-    protected function getName()
-    {
+    protected function getName() {
         return 'Surface Pressure Forecast Map';
     }
 
-    protected function getLayerName()
-    {
+    protected function getLayerName() {
         return 'Atlantic';
     }
 
-    protected function requiresTimestamp()
-    {
+    protected function requiresTimestamp() {
         return true;
     }
 
-    protected function getOverlayMap()
-    {
+    protected function getOverlayMap() {
         return null;
     }
 }
