@@ -71,7 +71,7 @@ For more examples of **met-office-weather-maps** in action see [http://waynedgra
 ## Requirements
 
 1. [DataPoint](http://www.metoffice.gov.uk/datapoint) API key (available for free)
-2. PHP version 5.5 or above installed on a web server
+2. PHP version 5 or above installed on the web server
 
 ## Installation
 
